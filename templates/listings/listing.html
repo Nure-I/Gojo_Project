@@ -96,7 +96,7 @@
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item text-secondary">
                                 <i class="fas fa-money-bill-alt"></i> Asking Price:
-                                <span class="float-right">${{ listing.price | intcomma }}</span>
+                                <span class="float-right">{{ listing.price | intcomma }} Birr {{ listing.price_term }} </span>
                             </li>
                             <li class="list-group-item text-secondary">
                                 <i class="fas fa-bed"></i> Bedrooms:
@@ -108,8 +108,11 @@
                             </li>
                             <li class="list-group-item text-secondary">
                                 <i class="fas fa-car"></i> Garage:
-                                <span class="float-right">{{ listing.garage }}
-                  </span>
+                                <span class="float-right">{{ listing.garage }}</span>
+                            </li>
+                            <li class="list-group-item text-secondary">
+                                <i class="fas fa-award"></i> Owner:
+                                <span class="float-right">{{ listing.owner.first_name }} {{ listing.owner.last_name }}</span>
                             </li>
                         </ul>
                     </div>
@@ -145,6 +148,14 @@
                         {{ listing.description }}
                     </div>
                 </div>
+
+                <!--                &lt;!&ndash;Google map&ndash;&gt;-->
+                <!--                <div id="map-container-google-3" class="z-depth-1-half map-container-3">-->
+                <!--                   <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1754.8728440654145!2d38.73914577186017!3d8.993566998858977!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOMKwNTknMzYuOCJOIDM4wrA0NCcyNC4yIkU!5e1!3m2!1sen!2sus!4v1629947369244!5m2!1sen!2sus"-->
+                <!--                    width="1000" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>-->
+                <!--                </div>-->
+
+                <!--                &lt;!&ndash;Google Maps&ndash;&gt;-->
             </div>
             <div class="col-md-3">
                 <div class="card mb-3">
@@ -154,14 +165,44 @@
                         <h6 class="text-secondary">{{ listing.realtor }}</h6>
                     </div>
                 </div>
-                <button class="btn-primary btn-block btn-lg" data-toggle="modal" data-target="#inquiryModal">Make An
-                    Inquiry
-                </button>
+                {% if is_realtor %}
+                    {% if realtor == listing.realtor %}
+                        {% if listing.is_published %}
+                            <button class="btn-danger btn-block btn-lg" data-toggle="modal" data-target="#deleteModal">
+                                Delete Post
+                            </button>
+                        {% else %}
+                            <button class="btn-info btn-block btn-lg" data-toggle="modal" data-target="#postModal">
+                                Post House
+                            </button>
+                        {% endif %}
+                    {% else %}
+                    <button class="btn-primary btn-block btn-lg" data-toggle="modal" data-target="#inquiryModal">Make An
+                        Inquiry
+                    </button>
+
+                    {% endif %}
+                {% elif owner %}
+                    {% if listing.is_published %}
+                        <button class="btn-danger btn-block btn-lg" data-toggle="modal" data-target="#deleteModal">
+                                    Delete
+                        </button>
+                    {% else %}
+                            <button class="btn-info btn-block btn-lg" data-toggle="modal" data-target="#postModal">
+                                Post House
+                            </button>
+                    {% endif %}
+                {% else %}
+                    <button class="btn-primary btn-block btn-lg" data-toggle="modal" data-target="#inquiryModal">Make An
+                        Inquiry
+                    </button>
+                {% endif %}
             </div>
         </div>
     </div>
 </section>
 <!-- Inquiry Modal -->
+
 <div class="modal fade" id="inquiryModal" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -210,5 +251,62 @@
         </div>
     </div>
 </div>
-<!--# Don't forget to copy again-->
+
+<!--# Deleting or unpublished-->
+
+<div class="modal fade" id="deleteModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Are You Sure?</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+
+                <form action="{% url 'delete' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="listing_id" value="{{ listing.id }}">
+                    <hr>
+                    <input type="hidden" name="listing" value="{{ listing.title }}">
+                    <hr>
+                    <button type="button" class="btn btn-block btn-secondary" data-dismiss="modal">
+                        Cancel
+                    </button>
+                    <input type="submit" value="Delete" class="btn-danger btn-block btn-lg">
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--# Post listing or publish -->
+
+<div class="modal fade" id="postModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="postModalLabel">Are You Sure?</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+
+                <form action="{% url 'post' %}" method="POST">
+                    {% csrf_token %}
+<!--                    <input type="hidden" name="listing_id" value="{{ listing.id }}">-->
+<!--                    <hr>-->
+                    <input type="hidden" name="listing" value="{{ listing.title }}">
+                    <hr>
+                    <button type="button" class="btn btn-block btn-danger" data-dismiss="modal">
+                        Cancel
+                    </button>
+                    <input type="submit" value="Post" class="btn-info btn-block btn-lg">
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}

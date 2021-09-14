@@ -39,3 +39,22 @@ state_choices = {
         'SD': 'Sidama'
 
 }
+property_choices = {
+    'Apartment': 'Apartment',
+    'Villa': 'Villa',
+    'House': 'House',
+    'Condominium': 'Condominium',
+    'Commercial': 'Commercial',
+    'Warehouse': 'Warehouse'
+
+}
+
+price_term = {
+    'Negotiable': 'Negotiable',
+    'Fixed': 'Fixed'
+}
+
+listed_for = {
+    'For Sell': 'Sell',
+    'For Rent': 'Rent'
+}

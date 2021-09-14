@@ -10,6 +10,36 @@
       <div class="row text-center">
         <div class="col-md-12">
           <form action="{% url 'search' %}">
+            <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label class="sr-only">Property Type</label>
+                                <select name="property" class="form-control">
+                                    <option selected="true" disabled="disabled">Property Type (All)</option>
+                                    {% for key,value in property_choices.items %}
+                                     <option value="{{ key }}"
+                      {% if key == values.property %}
+                        selected
+                      {% endif %}
+                      >{{ value }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+
+                            <div class="col-md-6 mb-3">
+                                <label class="sr-only">Search For</label>
+                                <select name="listed_for" class="form-control">
+                                    <option selected="true" disabled="disabled">Search For</option>
+                                    {% for key,value in listed_for.items %}
+                                     <option value="{{ key }}"
+                      {% if key == values.listed_for %}
+                        selected
+                      {% endif %}
+                      >{{ value }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
             <!-- Form Row 1 -->
             <div class="form-row">
               <div class="col-md-4 mb-3">

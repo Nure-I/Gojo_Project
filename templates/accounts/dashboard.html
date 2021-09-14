@@ -37,6 +37,35 @@
         <div class="row">
             <div class="col-md-12">
                 <h2>Welcome {{ user.first_name }}</h2>
+            {% if is_realtor %}
+                {% if realtors %}
+                    <p>Here are the property listings Inquired For You</p>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Property</th>
+                            <th scope="col">Status</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for contact in realtors %}
+                        <tr>
+                            <td>{{ contact.id}}</td>
+                            <td>{{ contact.listing }}</td>
+                            <td class="btn btn-info">{{ contact.requested }} </td>
+                            <td>
+                                <a class="btn btn-dark" href="{% url 'listing' contact.listing_id %}">View Listing</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p>You have not made any inquiries</p>
+                {% endif %}
+            {% else %}
                 {% if contacts %}
                     <p>Here are the property listings that you have inquired about</p>
                     <table class="table">
@@ -44,6 +73,7 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Property</th>
+                            <th scope="col">Status</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -52,8 +82,9 @@
                         <tr>
                             <td>{{ contact.id}}</td>
                             <td>{{ contact.listing }}</td>
+                            <td class="btn btn-info">{{ contact.requested }} </td>
                             <td>
-                                <a class="btn btn-light" href="{% url 'listing' contact.listing_id %}">View Listing</a>
+                                <a class="btn btn-warning" href="{% url 'cancel' contact.id %}" >Cancel Requested</a>
                             </td>
                         </tr>
                         {% endfor %}
@@ -61,6 +92,77 @@
                     </table>
                 {% else %}
                     <p>You have not made any inquiries</p>
+                {% endif %}
+            {% endif %}
+                {% if posted %}
+                    <p>Here are the property listings that you have Posted</p>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Property</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">View</th>
+                            <th scope="col">Cancel</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for posted in posted %}
+                        <tr>
+                            <td>{{ posted.id}}</td>
+                            <td>{{ posted.title }}</td>
+                            {% if posted.is_published %} <td class="btn btn-info">Published</td> {% else %}<td class="btn btn-danger">Not Published </td>{% endif %}
+                            <td>
+                                <a class="btn btn-dark" href="{% url 'listing' posted.id %}">View Post</a>
+                            </td>
+                            {% if posted.is_published %}
+                            <td>
+                                <a class="btn btn-danger" href="{% url 'listing' posted.id %}">Cancel Post</a>
+                            </td>
+                            {% else %}
+                            <td>
+                                <a class="btn btn-info" href="{% url 'post' posted.id %}">Post House</a>
+                            </td>
+                            {% endif %}
+
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p>You have not made any Posts</p>
+                {% endif %}
+                {% if is_realtor %}
+                    {% if listings %}
+                        <p>Here are the property listings that you have inquired about</p>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Property</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">View</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for list in listings %}
+                            <tr>
+                                <td>{{ list.id }}</td>
+                                <td>{{ list.title }}</td>
+                                <td class="btn btn-info">{% if list.is_published %} Published {% else %}Not Published {% endif %} </td>
+                                <td>
+                                    <a class="btn btn-dark" href="{% url 'listing' list.id %}">View Listing</a>
+                                </td>
+
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <p>You have not made any inquiries</p>
+                    {% endif %}
                 {% endif %}
             </div>
         </div>

@@ -2,7 +2,13 @@ from django.shortcuts import render, redirect
 from django.contrib import messages, auth
 from django.contrib.auth.models import User
 from contacts.models import Contact
+from accounts.decorators import unauthenticated_user
+from listings.models import Listing
+from realtors.models import Realtor
+from django.contrib.auth.models import Group
+from array import *
 
+@unauthenticated_user
 def register(request):
     if request.method == 'POST':
         # Get form values
@@ -32,6 +38,8 @@ def register(request):
                     # messages.success(request, 'You are now logged in')
                     # return redirect('index')
                     user.save()
+                    group = Group.objects.get(name='customer')
+                    user.groups.add(group)
                     messages.success(request, 'You are now registered and can log in')
                     return redirect('login')
         else:
@@ -41,6 +49,7 @@ def register(request):
         return render(request, 'accounts/register.html')
 
 
+@unauthenticated_user
 def login(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -68,8 +77,23 @@ def logout(request):
 
 def dashboard(request):
     user_contacts = Contact.objects.order_by('-contact_date').filter(user_id=request.user.id)
-
+    posted = Listing.objects.order_by('id').filter(owner=request.user)
+    if request.user.groups.filter(name='realtors').exists():
+        realtor = Realtor.objects.get(email__exact=request.user.email)
+        is_realtor = request.user.groups.filter(name='realtors').exists()
+        listings = Listing.objects.order_by('-list_date').filter(realtor=realtor)
+        print(type(listings))
+        realtor_contacts = Contact.objects.order_by('-contact_date').filter(listing=listings[0])
+        print(realtor_contacts)
+    else:
+        is_realtor = False
+        listings = None
+        realtor_contacts = None
     context = {
-      'contacts': user_contacts
+        'contacts': user_contacts,
+        'posted': posted,
+        'listings': listings,
+        'is_realtor': is_realtor,
+        'realtors': realtor_contacts
     }
     return render(request, 'accounts/dashboard.html', context)
