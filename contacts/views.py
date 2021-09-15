@@ -72,15 +72,39 @@ def post(request):
 
 
 def cancel(request, contact_id):
-    contacts = get_object_or_404(Contact, pk=contact_id)
-    print(contact_id)
-    # if request.method == 'POST':
-    #     # listing_id = request.POST.get('listing_id')
-    #     # print(listing_id)
-    #     listing = request.POST.get('listing')
-    #     print(listing)
-    #     list = Listing.objects.get(title=listing)
-    #     list.is_published = True
-    #     list.save()
+    contacts = Contact.objects.get(id=contact_id)
+    print(contacts)
+
+    contacts.requested = 'Request canceled'
+    contacts.save()
+
+    return redirect('dashboard')
+
+
+# check this one
+def requests(request, request_id):
+    contacted = Contact.objects.get(id=request_id)
+    print(contacted)
+    contacted.requested = 'Requested'
+    contacted.save()
+    return redirect('dashboard')
+
+
+def accept(request, accept_id):
+    contacts = get_object_or_404(Contact, pk=accept_id)
+    # print(contacts[0].requested)
+
+    contacts.requested = 'Request Accepted'
+    contacts.save()
+
+    return redirect('dashboard')
+
+
+def reject(request, reject_id):
+    contacts = get_object_or_404(Contact, pk=reject_id)
+    print(contacts.requested)
+
+    contacts.requested = 'Request Rejected'
+    contacts.save()
 
     return redirect('dashboard')

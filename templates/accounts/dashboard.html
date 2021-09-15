@@ -39,14 +39,16 @@
                 <h2>Welcome {{ user.first_name }}</h2>
             {% if is_realtor %}
                 {% if realtors %}
-                    <p>Here are the property listings Inquired For You</p>
+                    <p class="font-italic">Here are the property listings Contacted You</p>
                     <table class="table">
                         <thead>
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Property</th>
+                            <th scope="col">Name</th>
                             <th scope="col">Status</th>
-                            <th></th>
+                            <th scope="col">View</th>
+                            <th scope="col"></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -54,20 +56,29 @@
                         <tr>
                             <td>{{ contact.id}}</td>
                             <td>{{ contact.listing }}</td>
+                            <td>{{ contact.name }}</td>
                             <td class="btn btn-info">{{ contact.requested }} </td>
                             <td>
                                 <a class="btn btn-dark" href="{% url 'listing' contact.listing_id %}">View Listing</a>
+                            </td>
+                            <td>
+                            {% if contact.requested == 'Requested' %}
+                                <a class="btn btn-success" href="{% url 'accept' contact.id %}" >Accept</a>
+                                <a class="btn btn-danger" href="{% url 'reject' contact.id %}" >Reject</a>
+                            {% else %}
+                                <a></a>
+                            {% endif %}
                             </td>
                         </tr>
                         {% endfor %}
                         </tbody>
                     </table>
                 {% else %}
-                    <p>You have not made any inquiries</p>
+                    <p class="font-italic">There is No Inquired Property For You</p>
                 {% endif %}
             {% else %}
                 {% if contacts %}
-                    <p>Here are the property listings that you have inquired about</p>
+                    <p class="font-italic">Here are the property listings that you have inquired about</p>
                     <table class="table">
                         <thead>
                         <tr>
@@ -84,18 +95,24 @@
                             <td>{{ contact.listing }}</td>
                             <td class="btn btn-info">{{ contact.requested }} </td>
                             <td>
-                                <a class="btn btn-warning" href="{% url 'cancel' contact.id %}" >Cancel Requested</a>
+                            {% if contact.requested == 'Request canceled' or contact.requested == 'Request Rejected' %}
+                                <a class="btn btn-success" href="{% url 'requests' contact.id %}" >Request Again</a>
+                            {% else %}
+                                <a class="btn btn-warning" href="{% url 'cancel' contact.id %}" >Cancel Request</a>
+                            {% endif %}
                             </td>
+
+
                         </tr>
                         {% endfor %}
                         </tbody>
                     </table>
                 {% else %}
-                    <p>You have not made any inquiries</p>
+                    <p class="font-italic">You have not made any inquiries</p>
                 {% endif %}
             {% endif %}
                 {% if posted %}
-                    <p>Here are the property listings that you have Posted</p>
+                    <p class="font-italic">Here are the property listings that you have Posted</p>
                     <table class="table">
                         <thead>
                         <tr>
@@ -131,11 +148,11 @@
                         </tbody>
                     </table>
                 {% else %}
-                    <p>You have not made any Posts</p>
+                    <p class="font-italic">You have not made any Posts</p>
                 {% endif %}
                 {% if is_realtor %}
                     {% if listings %}
-                        <p>Here are the property listings that you have inquired about</p>
+                        <p class="font-italic">Here are the property listings that you have inquired about</p>
                         <table class="table">
                             <thead>
                             <tr>
@@ -161,7 +178,7 @@
                             </tbody>
                         </table>
                     {% else %}
-                        <p>You have not made any inquiries</p>
+                        <p class="font-italic">You have not made any inquiries</p>
                     {% endif %}
                 {% endif %}
             </div>

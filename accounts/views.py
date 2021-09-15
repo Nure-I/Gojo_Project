@@ -8,6 +8,7 @@ from realtors.models import Realtor
 from django.contrib.auth.models import Group
 from array import *
 
+
 @unauthenticated_user
 def register(request):
     if request.method == 'POST':
@@ -38,7 +39,7 @@ def register(request):
                     # messages.success(request, 'You are now logged in')
                     # return redirect('index')
                     user.save()
-                    group = Group.objects.get(name='customer')
+                    group = Group.objects.get(name='customers')
                     user.groups.add(group)
                     messages.success(request, 'You are now registered and can log in')
                     return redirect('login')
@@ -82,8 +83,8 @@ def dashboard(request):
         realtor = Realtor.objects.get(email__exact=request.user.email)
         is_realtor = request.user.groups.filter(name='realtors').exists()
         listings = Listing.objects.order_by('-list_date').filter(realtor=realtor)
-        print(type(listings))
-        realtor_contacts = Contact.objects.order_by('-contact_date').filter(listing=listings[0])
+
+        realtor_contacts = Contact.objects.order_by('-contact_date').filter(listing__in=listings.values_list('title', flat=True))
         print(realtor_contacts)
     else:
         is_realtor = False
