@@ -30,6 +30,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'pages.apps.PagesConfig',
     'listings.apps.ListingsConfig',
     'realtors.apps.RealtorsConfig',
@@ -125,11 +126,17 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'gojo/static')
 ]
-
+# Jet Theme
+# JET_PROJECT = 'gojo'
+# JET_TOKEN = 'ec66af25-443c-44a6-8a2d-fb6f2312cbed'
 # Media folder Settings
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+JAZZMIN_UI_TWEAKS = {
+    "theme": "cyborg",
+    "dark_mode_theme": "darkly",
+}
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 

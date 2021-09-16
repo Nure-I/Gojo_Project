@@ -9,4 +9,6 @@ urlpatterns = [
     path('search', views.search, name='search'),
     path('addlisting', views.addlist, name='addlisting'),
     path('realtor', views.realtor, name='realtor'),
+    path('delete', views.delete, name='delete'),
+    path('post', views.post, name='post')
 ]

@@ -290,20 +290,17 @@
                 <button type="button" class="close" data-dismiss="modal">
                     <span>&times;</span>
                 </button>
-
                 <form action="{% url 'post' %}" method="POST">
                     {% csrf_token %}
-<!--                    <input type="hidden" name="listing_id" value="{{ listing.id }}">-->
-<!--                    <hr>-->
+                    <input type="hidden" name="listing_id" value="{{ listing.id }}">
+                    <hr>
                     <input type="hidden" name="listing" value="{{ listing.title }}">
                     <hr>
                     <button type="button" class="btn btn-block btn-danger" data-dismiss="modal">
                         Cancel
                     </button>
-                    <input type="submit" value="Post" class="btn-info btn-block btn-lg">
+                    <input type="submit" value="Post" class="btn-success btn-block btn-lg">
                 </form>
-
-
             </div>
         </div>
     </div>

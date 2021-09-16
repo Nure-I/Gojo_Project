@@ -43,32 +43,27 @@ def contact(request):
         return redirect('/listings/' + listing_id)
 
 
-def delete(request):
-    # if request.user.groups.filter(name='realtors').exists():
-    if request.method == 'POST':
-        listing_id = request.POST.get('listing_id')
-        print(listing_id)
-        listing = request.POST.get('listing')
-        print(listing)
-        list = Listing.objects.get(title=listing)
-        list.is_published = False
-        list.save()
-
-    return redirect('dashboard')
-
-
-def post(request):
-    # if request.user.groups.filter(name='realtors').exists():
-    if request.method == 'POST':
-        # listing_id = request.POST.get('listing_id')
-        # print(listing_id)
-        listing = request.POST.get('listing')
-        print(listing)
-        list = Listing.objects.get(title=listing)
-        list.is_published = True
-        list.save()
-
-    return redirect('dashboard')
+# def delete(request):
+#     # if request.user.groups.filter(name='realtors').exists():
+#     if request.method == 'POST':
+#         listing_id = request.POST.get('listing_id')
+#         print(listing_id)
+#         listing = request.POST.get('listing')
+#         print(listing)
+#         list = Listing.objects.get(title=listing)
+#         list.is_published = False
+#         list.save()
+#
+#     return redirect('dashboard')
+#
+#
+# def post(request, listed_id):
+#     listing = Listing.objects.get(id=listed_id)
+#     print(listing)
+#     listing.is_published = True
+#     listing.save()
+#
+#     return redirect('dashboard')
 
 
 def cancel(request, contact_id):

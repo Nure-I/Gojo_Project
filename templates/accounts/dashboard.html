@@ -101,8 +101,6 @@
                                 <a class="btn btn-warning" href="{% url 'cancel' contact.id %}" >Cancel Request</a>
                             {% endif %}
                             </td>
-
-
                         </tr>
                         {% endfor %}
                         </tbody>
@@ -139,10 +137,9 @@
                             </td>
                             {% else %}
                             <td>
-                                <a class="btn btn-info" href="{% url 'post' posted.id %}">Post House</a>
+                                <a class="btn btn-info" href="{% url 'listing' posted.id %}">Post House</a>
                             </td>
                             {% endif %}
-
                         </tr>
                         {% endfor %}
                         </tbody>
@@ -160,7 +157,6 @@
                                 <th scope="col">Property</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">View</th>
-
                             </tr>
                             </thead>
                             <tbody>
@@ -172,7 +168,6 @@
                                 <td>
                                     <a class="btn btn-dark" href="{% url 'listing' list.id %}">View Listing</a>
                                 </td>
-
                             </tr>
                             {% endfor %}
                             </tbody>
