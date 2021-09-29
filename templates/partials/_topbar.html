@@ -1,20 +1,50 @@
 <!-- Top Bar -->
+{% load i18n %}
 <section id="" class="p-3 text-black" style="background-color:light;">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-4"><i class="fas fa-phone"></i>+251964353780</div>
-      <div class="col-md-4">
-        <i class="fas fa-envelope-open"></i> Gojobet@gmail.com
-      </div>
-      <div class="col-md-4">
-        <div class="social text-right ">
-          <a href="#"> <i class="fab fa-twitter text-black"></i> </a>
-          <a href="#"> <i class="fab fa-facebook text-black"></i> </a>
-          <a href="#"> <i class="fab fa-linkedin text-black"></i> </a>
-          <a href="#"> <i class="fab fa-instagram text-black"></i> </a>
-          <a href="#"> <i class="fab fa-pinterest text-black"></i> </a>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3"><i class="fas fa-phone"></i>+251964353780</div>
+            <div class="col-md-3">
+                <i class="fas fa-envelope-open"></i> Gojobet@gmail.com
+            </div>
+            <div class="col-md-3">
+                <div class="social text-right ">
+                    <a href="#"> <i class="fab fa-twitter text-black"></i> </a>
+                    <a href="#"> <i class="fab fa-facebook text-black"></i> </a>
+                    <a href="#"> <i class="fab fa-linkedin text-black"></i> </a>
+                    <a href="#"> <i class="fab fa-instagram text-black"></i> </a>
+                    <a href="#"> <i class="fab fa-pinterest text-black"></i> </a>
+                </div>
+            </div>
+            <div class="col-md-3 ">
+                <a href="{% url 'feedback' %}"><i class="fas fa-comments "> FeedBack</i></a>
+                <a href="{% url 'contactus' %}"><i class="fas fa-comments "> Contact Us</i></a>
+<!--                <div class="social text-right ">-->
+<!--                    <div class="btn-group dropend" style="display: inline-block">-->
+<!--                        <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown"-->
+<!--                                aria-expanded="false">-->
+<!--                            Language-->
+<!--                        </button>-->
+<!--                        <ul class="dropdown-menu" style="display: outside position: sticky;">-->
+<!--                            &lt;!&ndash; Dropdown menu links &ndash;&gt;-->
+<!--                            {% get_current_language as LANGUAGE_CODE %}-->
+<!--                            {% get_available_languages as LANGUAGES %}-->
+<!--                            {% get_language_info_list for LANGUAGES as languages %}-->
+<!--                            {% for lang in languages %}-->
+<!--                            <li><a class="dropdown-item" href="/{{lang.code}}">{{ lang.name_local }}</a></li>-->
+
+<!--                            {% endfor %}-->
+<!--                        </ul>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+                <!--                <select class="form-control form-control-sm">-->
+                <!--                    <option selected="true" disabled="disabled">Language</option>-->
+                <!--                    <option value="en">English</option>-->
+                <!--                    <option value="am">አማርኛ</option>-->
+                <!--                </select>-->
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+
 </section>

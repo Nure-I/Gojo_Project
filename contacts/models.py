@@ -1,5 +1,7 @@
 from django.db import models
 from datetime import datetime
+from listings.models import Listing
+
 
 class Contact(models.Model):
     status = (
@@ -17,6 +19,36 @@ class Contact(models.Model):
     contact_date = models.DateTimeField(default=datetime.now, blank=True)
     user_id = models.IntegerField(blank=True)
     requested = models.CharField(max_length=100, choices=status, default="Requested")
+    paid = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.name
+
+
+class Payment(models.Model):
+    customer = models.ForeignKey(Contact, on_delete=models.DO_NOTHING, default=1)
+    house = models.CharField(max_length=100)
+    payment = models.CharField(max_length=100, default="Not Payed")
+    payment_date = models.DateTimeField(default=datetime.now, blank=True)
+
+    def __str__(self):
+        return self.house
+
+
+class Feedback(models.Model):
+    name = models.CharField(max_length=200)
+    email = models.CharField(max_length=100)
+    subject = models.TextField()
+
+    def __str__(self):
+        return self.name
+
+
+class Contactus(models.Model):
+    name = models.CharField(max_length=200)
+    email = models.CharField(max_length=100)
+    subject = models.TextField()
+    message = models.TextField()
 
     def __str__(self):
         return self.name

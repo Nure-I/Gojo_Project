@@ -95,7 +95,14 @@
                             <td>{{ contact.listing }}</td>
                             <td class="btn btn-info">{{ contact.requested }} </td>
                             <td>
-                            {% if contact.requested == 'Request canceled' or contact.requested == 'Request Rejected' %}
+                            {% if contact.requested == 'Request Accepted' %}
+                                {% if contact.paid == True %}
+                                    <a class="btn btn-success" href="" >Payment Completed</a>
+                                {% else %}
+                                    <a class="btn btn-warning" href="{% url 'cancel' contact.id %}" >Cancel Request</a>
+                                    <a class="btn btn-success" href="{% url 'listing' contact.listing_id %}" >payment methods</a>
+                                {% endif %}
+                            {% elif contact.requested == 'Request canceled' or contact.requested == 'Request Rejected' %}
                                 <a class="btn btn-success" href="{% url 'requests' contact.id %}" >Request Again</a>
                             {% else %}
                                 <a class="btn btn-warning" href="{% url 'cancel' contact.id %}" >Cancel Request</a>

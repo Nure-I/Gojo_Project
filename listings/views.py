@@ -4,8 +4,11 @@ from listings.choices import bedroom_choices, state_choices, property_choices, l
 from django.contrib import messages, auth
 from accounts.decorators import allowed_user
 from realtors.models import Realtor
+from contacts.models import Contact
 from .models import Listing
 from .forms import ListForm
+from django.utils.translation import gettext as _
+from django.utils.translation import get_language, activate, gettext
 
 
 def index(request):
@@ -13,7 +16,6 @@ def index(request):
     paginator = Paginator(listings, 6)
     page = request.GET.get('page')
     paged_listings = paginator.get_page(page)
-
     context = {
         'listings': paged_listings,
     }
@@ -23,6 +25,12 @@ def index(request):
 
 def listing(request, listing_id):
     listing = get_object_or_404(Listing, pk=listing_id)
+    contact = None
+    if Contact.objects.filter(listing_id=listing_id).exists():
+        contact = Contact.objects.get(listing_id=listing_id)
+    customer = False
+    if request.user.groups.filter(name='customers').exists():
+        customer = True
     owner = False
     if request.user.is_authenticated:
         if listing.owner == request.user:
@@ -33,11 +41,36 @@ def listing(request, listing_id):
     else:
         is_realtor = False
         realtor = None
+    Service_pay = (int(listing.price * 0.02))
+    Total_pay = (int(listing.price * 0.02) + listing.price)
+    yene_obj = {
+        "process": "Express",
+        "successUrl": "http://127.0.0.1:8000/en/contacts/success/" + str(listing_id),
+        "ipnUrl": "http://127.0.0.1:8000/ipn",
+        "cancelUrl": "http://127.0.0.1:8000/en/contacts/cancel",
+        "merchantId": "SB1258",
+        "merchantOrderId": "val10.0",
+        "expiresAfter": 24,
+        "itemId": 1,
+        "itemName": listing.title,
+        "unitPrice": listing.price,
+        "quantity": 1,
+        "discount": 0.0,
+        "handlingFee": Service_pay,
+        "deliveryFee": 0.0,
+        "tax1": 0.0,
+        "tax2": 0.0,
+    }
     context = {
         'listing': listing,
+        'contact': contact,
         'is_realtor': is_realtor,
         'realtor': realtor,
-        'owner': owner
+        'owner': owner,
+        'customer': customer,
+        'yenepay': yene_obj,
+        'Service_pay': Service_pay,
+        'Total_pay': Total_pay
     }
 
     return render(request, 'listings/listing.html', context)
@@ -229,3 +262,13 @@ def post(request):
         list.save()
 
     return redirect('dashboard')
+
+
+def trans(language):
+    cur_language = get_language()
+    try:
+        activate(language)
+        text = gettext('hello')
+    finally:
+        activate(cur_language)
+    return text

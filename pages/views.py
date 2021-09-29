@@ -4,6 +4,7 @@ from listings.models import Listing
 from realtors.models import Realtor
 from listings.choices import bedroom_choices, price_choices, state_choices, listed_for, property_choices
 from accounts.decorators import customer_only
+from django.utils.translation import get_language, activate, gettext
 
 
 # @customer_only
@@ -36,3 +37,13 @@ def about(request):
         'mvp_realtors': mvp_realtors
     }
     return render(request, 'pages/about.html', context)
+
+
+def trans(language):
+    cur_language = get_language()
+    try:
+        activate(language)
+        text = gettext('hello')
+    finally:
+        activate(cur_language)
+    return text

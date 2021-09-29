@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.core.mail import send_mail
-from .models import Contact
+from .models import Contact, Feedback, Contactus, Payment
 from listings.models import Listing
 from django.shortcuts import get_object_or_404
+from django.http import JsonResponse
+import json
 
 
 def contact(request):
@@ -64,6 +66,36 @@ def contact(request):
 #     listing.save()
 #
 #     return redirect('dashboard')
+def feedback(request):
+    if request.method == 'POST':
+        feedback = Feedback()
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        subject = request.POST.get('subject')
+        feedback.name = name
+        feedback.email = email
+        feedback.subject = subject
+        feedback.save()
+        messages.success(request, 'Your feedback has been submitted, Thanks for your feedback ')
+        return redirect('/')
+    return render(request, 'pages/feedback.html')
+
+
+def contactus(request):
+    if request.method == 'POST':
+        contact = Contactus()
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+        contact.name = name
+        contact.email = email
+        contact.subject = subject
+        contact.message = message
+        contact.save()
+        messages.success(request, 'We will contact you soon, Thanks ')
+        return redirect('contactus')
+    return render(request, 'pages/contactus.html')
 
 
 def cancel(request, contact_id):
@@ -103,3 +135,88 @@ def reject(request, reject_id):
     contacts.save()
 
     return redirect('dashboard')
+
+
+def checkout(request, checkout_id):
+    contacts = get_object_or_404(Contact, pk=checkout_id)
+    listid = contacts.listing_id
+    listing = get_object_or_404(Listing, pk=listid)
+    # print(listing.price)
+
+    return redirect('dashboard')
+
+
+def payment_complete(request):
+    body = json.loads(request.body)
+    print("BODY:", body)
+    contact = Contact.objects.get(listing_id=body['listingID'])
+    print(contact)
+    print(contact.listing)
+    payment = Payment()
+    payment.customer = contact
+    payment.house = contact.listing
+
+    payment.payment = 'Payment Completed'
+    payment.save()
+    send_mail(
+        'Property Listing Inquiry',
+        'There has been an inquiry for ' + contact.listing + '. Sign into the admin panel for more info ',
+        'nuredinibrahim40@gmail.com',
+        [contact.email, 'ibrahimsaladin1@gmail.com'],
+        fail_silently=False
+    )
+
+    messages.success(request, 'Payment successfully completed')
+    return JsonResponse('payment Completed!', safe=False)
+
+
+def success(request, success_id):
+    contact = Contact.objects.all()
+    if 'TotalAmount' in request.GET:
+        TotalAmount = request.GET['TotalAmount']
+    if 'BuyerId' in request.GET:
+        BuyerId = request.GET['BuyerId']
+    if 'MerchantOrderId' in request.GET:
+        MerchantOrderId = request.GET['MerchantOrderId']
+    if 'MerchantCode' in request.GET:
+        MerchantCode = request.GET['MerchantCode']
+    if 'MerchantId' in request.GET:
+        MerchantId = request.GET['MerchantId']
+    if 'TransactionCode' in request.GET:
+        TransactionCode = request.GET['TransactionCode']
+    if 'TransactionId' in request.GET:
+        TransactionId = request.GET['TransactionId']
+    if 'Status' in request.GET:
+        Status = request.GET['Status']
+    if 'Currency' in request.GET:
+        Currency = request.GET['Currency']
+    if 'Signature' in request.GET:
+        Signature = request.GET['Signature']
+        print(Status)
+        print(TotalAmount)
+    listing = get_object_or_404(Listing, pk=success_id)
+    listing.is_published = False
+    listing.save()
+    contact = Contact.objects.get(listing_id=success_id)
+    contact.paid = True
+    contact.save()
+    # payment = Payment()
+    # payment.customer = contact
+    # payment.house = contact.listing
+    #
+    # payment.payment = 'Payment Completed'
+    # payment.save()
+    # send_mail(
+    #     'Property Listing Inquiry',
+    #     'There has been an inquiry for ' + contact.listing + '. Sign into the admin panel for more info ',
+    #     'nuredinibrahim40@gmail.com',
+    #     [contact.email, 'ibrahimsaladin1@gmail.com'],
+    #     fail_silently=False
+    # )
+
+    messages.success(request, 'Payment successfully completed')
+    return redirect('dashboard')
+
+
+def cancel_pay(request):
+    return redirect('')

@@ -96,7 +96,7 @@
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item text-secondary">
                                 <i class="fas fa-money-bill-alt"></i> Asking Price:
-                                <span class="float-right">{{ listing.price | intcomma }} Birr {{ listing.price_term }} </span>
+                                <span class="float-right">{{ listing.price | intcomma }} ETB {{ listing.price_term }} </span>
                             </li>
                             <li class="list-group-item text-secondary">
                                 <i class="fas fa-bed"></i> Bedrooms:
@@ -188,9 +188,33 @@
                                     Delete
                         </button>
                     {% else %}
-                            <button class="btn-info btn-block btn-lg" data-toggle="modal" data-target="#postModal">
-                                Post House
+                        <button class="btn-info btn-block btn-lg" data-toggle="modal" data-target="#postModal">
+                            Post House
+                        </button>
+                    {% endif %}
+                {% elif customer %}
+                    {% if contact.requested == 'Request Accepted' %}
+                        {% if contact.paid == True %}
+                            {% if listing.listed_for == 'For Sell' %}
+                            <button class="btn-secondary btn-block btn-lg" data-toggle="modal" data-target="">SOLD
                             </button>
+                            {% else %}
+                            <button class="btn-secondary btn-block btn-lg" data-toggle="modal" data-target="#">RENTED
+                            </button>
+                            {% endif %}
+                        {% else %}
+                            <button class="btn-secondary btn-block btn-lg" data-toggle="modal" data-target="#yenepayModal">YenePay
+                            </button>
+                            <hr>
+                            <div id="paypal-button-container"></div>
+                            <hr>
+                            <button class="btn-light btn-block btn-lg" data-toggle="modal" data-target="#yenepayModal">Pay With Bank
+                            </button>
+                        {% endif %}
+                    {% else %}
+                        <button class="btn-primary btn-block btn-lg" data-toggle="modal" data-target="#inquiryModal">Make An
+                            Inquiry
+                        </button>
                     {% endif %}
                 {% else %}
                     <button class="btn-primary btn-block btn-lg" data-toggle="modal" data-target="#inquiryModal">Make An
@@ -305,5 +329,104 @@
         </div>
     </div>
 </div>
+<!--# Yenepay-->
 
+<div class="modal fade" id="yenepayModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+<!--                <h4 class="modal-title" id="yenepayModalLabel">{{listing.title}}</h4><br>-->
+                <img src="{{ listing.photo_main.url }}" alt="" width="20px" height="150px"><br>
+<!--                <h7 class="modal-title" id="yenepayModalLabel">{{listing.title}}</h7>-->
+<!--                <button type="button" class="close" data-dismiss="modal">-->
+<!--                    <span>&times;</span>-->
+<!--                </button>-->
+
+                <form action="https://test.yenepay.com" method="POST" target="_blank">
+                    {% csrf_token %}
+                    {% for name,value in yenepay.items %}
+                    <input type="hidden" name="{{ name }}" value="{{ value }}">
+
+                    {% endfor %}
+                    {{listing.title}}<br> {{listing.price}} ETB + 2% (Service Pay) <br>
+                    Total: {{Total_pay}}
+                    <input type="submit" value="Pay with YenePay" class="btn-success btn-block btn-lg">
+                    <button type="button" class="btn btn-block btn-danger" data-dismiss="modal">
+                        Cancel
+                    </button>
+
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+ <script src="https://www.paypal.com/sdk/js?client-id=AXahcq9YrJSG5Jp0Ch78THwr0tO815mJPX_vSRejwp-vHPq2X9r4lyLm4Bg07pajlL6YwE1Cx9sQ2c-F&currency=ETB"></script>
+<script>
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        const csrftoken = getCookie('csrftoken');
+        var price = '{{listing.price}}'
+        var listingId = '{{contact.listing_id}}'
+
+        function completeOrder(){
+        var url = "{% url 'complete' %}"
+
+        fetch(url, {
+            method:'POST',
+            headers:{
+                'Content-type':'application/json',
+                'X-CSRFToken':csrftoken,
+                },
+                body:JSON.stringify({'listingID':listingId})
+            })
+        }
+        // Render the PayPal button into #paypal-button-container
+        paypal.Buttons({
+
+            // Set up the transaction
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: price
+                        }
+                    }]
+                });
+            },
+
+            // Finalize the transaction
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(orderData) {
+                    // Successful capture! For demo purposes:
+                    completeOrder()
+                    console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                    var transaction = orderData.purchase_units[0].payments.captures[0];
+                    alert('Transaction '+ transaction.status + ': ' + transaction.id + '\n\nCheck Your Email For More Info');
+
+                    // Replace the above to show a success message within this page, e.g.
+                    // const element = document.getElementById('paypal-button-container');
+                    // element.innerHTML = '';
+                    // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+                    // Or go to another URL:  actions.redirect('thank_you.html');
+                });
+            }
+
+
+        }).render('#paypal-button-container');
+    </script>
 {% endblock %}
