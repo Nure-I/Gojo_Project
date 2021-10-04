@@ -1,11 +1,15 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages, auth
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import PasswordChangeForm
 from contacts.models import Contact
 from accounts.decorators import unauthenticated_user
 from listings.models import Listing
 from realtors.models import Realtor
 from django.contrib.auth.models import Group
+from .forms import UpdateProfile
+from django.contrib.auth.views import PasswordChangeView
+from django.urls import reverse_lazy
 from array import *
 
 
@@ -76,6 +80,31 @@ def logout(request):
         return redirect('index')
 
 
+def profile(request):
+    u_form = UpdateProfile()
+    user = request.user
+    update_user = User.objects.filter(username=user.username)
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            username = request.POST['username']
+            email = request.POST['email']
+            if username and email is not None:
+                user.username = username
+                user.email = email
+                user.save()
+                messages.success(request, 'Your profile Updated')
+                return redirect('dashboard')
+            else:
+                return redirect('update_profile')
+    else:
+        messages.error(request, 'Your not Authenticated')
+    context = {
+        'u_form': u_form,
+        'user': user
+    }
+    return render(request, 'accounts/edit_profile.html', context)
+
+
 def dashboard(request):
     user_contacts = Contact.objects.order_by('-contact_date').filter(user_id=request.user.id)
     posted = Listing.objects.order_by('id').filter(owner=request.user)
@@ -84,7 +113,8 @@ def dashboard(request):
         is_realtor = request.user.groups.filter(name='realtors').exists()
         listings = Listing.objects.order_by('-list_date').filter(realtor=realtor)
 
-        realtor_contacts = Contact.objects.order_by('-contact_date').filter(listing__in=listings.values_list('title', flat=True))
+        realtor_contacts = Contact.objects.order_by('-contact_date').filter(
+            listing__in=listings.values_list('title', flat=True))
         print(realtor_contacts)
     else:
         is_realtor = False
@@ -98,3 +128,14 @@ def dashboard(request):
         'realtors': realtor_contacts
     }
     return render(request, 'accounts/dashboard.html', context)
+
+
+class PasswordsChangeView(PasswordChangeView):
+    form_class = PasswordChangeForm
+    success_url = reverse_lazy('password_success')
+
+def password_success(request):
+    context = {
+
+    }
+    return render(request, 'password_reset/password_change_done.html', context)

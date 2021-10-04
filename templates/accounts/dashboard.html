@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 
 {% block title %} | Dashboard{% endblock %}
-
+{% load i18n %}
 {% block content %}
 <section id="" class="py-5 text-white" style="background-color:#142642;">
     <div class="container">
         <div class="row text-center">
             <div class="col-md-12">
-                <h1 class="display-4">User Dashboard</h1>
-                <p class="lead">Manage your Real Estate Account</p>
+                <h1 class="display-4">{% trans "User Dashboard" %}</h1>
+                <p class="lead">{% trans "Manage your Gojo Account/" %} <a href="{% url 'update_profile' %}" class="text-white">{% trans "Change Profile" %}</a><a href="{% url 'password' %}" class="text-white"> / {% trans "Change Password" %}</a></p>
             </div>
         </div>
     </div>
@@ -21,9 +21,9 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
                     <a href="{% url 'index' %}">
-                        <i class="fas fa-home"></i> Home</a>
+                        <i class="fas fa-home"></i> {% trans "Home" %}</a>
                 </li>
-                <li class="breadcrumb-item active"> Dashboard</li>
+                <li class="breadcrumb-item active">{% trans " Dashboard" %}</li>
             </ol>
         </nav>
     </div>
@@ -36,18 +36,18 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2>Welcome {{ user.first_name }}</h2>
+                <h2>{% trans "Welcome" %} {{ user.first_name }}</h2>
             {% if is_realtor %}
                 {% if realtors %}
-                    <p class="font-italic">Here are the property listings Contacted You</p>
+                    <p class="font-italic">{% trans "Here are the property listings Contacted You" %}</p>
                     <table class="table">
                         <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Property</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">View</th>
+                            <th scope="col">{% trans "Property" %}</th>
+                            <th scope="col">{% trans "Name" %}</th>
+                            <th scope="col">{% trans "Status" %}</th>
+                            <th scope="col">{% trans "View" %}</th>
                             <th scope="col"></th>
                         </tr>
                         </thead>
@@ -59,12 +59,12 @@
                             <td>{{ contact.name }}</td>
                             <td class="btn btn-info">{{ contact.requested }} </td>
                             <td>
-                                <a class="btn btn-dark" href="{% url 'listing' contact.listing_id %}">View Listing</a>
+                                <a class="btn btn-dark" href="{% url 'listing' contact.listing_id %}">{% trans "View Listing" %}</a>
                             </td>
                             <td>
                             {% if contact.requested == 'Requested' %}
-                                <a class="btn btn-success" href="{% url 'accept' contact.id %}" >Accept</a>
-                                <a class="btn btn-danger" href="{% url 'reject' contact.id %}" >Reject</a>
+                                <a class="btn btn-success" href="{% url 'accept' contact.id %}" >{% trans "Accept" %}</a>
+                                <a class="btn btn-danger" href="{% url 'reject' contact.id %}" >{% trans "Reject" %}</a>
                             {% else %}
                                 <a></a>
                             {% endif %}
@@ -74,17 +74,17 @@
                         </tbody>
                     </table>
                 {% else %}
-                    <p class="font-italic">There is No Inquired Property For You</p>
+                    <p class="font-italic">{% trans "There is No Inquired Property For You" %}</p>
                 {% endif %}
             {% else %}
                 {% if contacts %}
-                    <p class="font-italic">Here are the property listings that you have inquired about</p>
+                    <p class="font-italic">{% trans "Here are the property listings that you have inquired about" %}</p>
                     <table class="table">
                         <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Property</th>
-                            <th scope="col">Status</th>
+                            <th scope="col">{% trans "Property" %}</th>
+                            <th scope="col">{% trans "Status" %}</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -97,15 +97,15 @@
                             <td>
                             {% if contact.requested == 'Request Accepted' %}
                                 {% if contact.paid == True %}
-                                    <a class="btn btn-success" href="" >Payment Completed</a>
+                                    <a class="btn btn-success" href="" >{% trans "Payment Completed" %}</a>
                                 {% else %}
-                                    <a class="btn btn-warning" href="{% url 'cancel' contact.id %}" >Cancel Request</a>
-                                    <a class="btn btn-success" href="{% url 'listing' contact.listing_id %}" >payment methods</a>
+                                    <a class="btn btn-warning" href="{% url 'cancel' contact.id %}" >{% trans "Cancel Request" %}</a>
+                                    <a class="btn btn-success" href="{% url 'listing' contact.listing_id %}" >{% trans "payment methods" %}</a>
                                 {% endif %}
                             {% elif contact.requested == 'Request canceled' or contact.requested == 'Request Rejected' %}
-                                <a class="btn btn-success" href="{% url 'requests' contact.id %}" >Request Again</a>
+                                <a class="btn btn-success" href="{% url 'requests' contact.id %}" >{% trans "Request Again" %}</a>
                             {% else %}
-                                <a class="btn btn-warning" href="{% url 'cancel' contact.id %}" >Cancel Request</a>
+                                <a class="btn btn-warning" href="{% url 'cancel' contact.id %}" >{% trans "Cancel Request" %}</a>
                             {% endif %}
                             </td>
                         </tr>
@@ -113,19 +113,19 @@
                         </tbody>
                     </table>
                 {% else %}
-                    <p class="font-italic">You have not made any inquiries</p>
+                    <p class="font-italic">{% trans "You have not made any inquiries" %}</p>
                 {% endif %}
             {% endif %}
                 {% if posted %}
-                    <p class="font-italic">Here are the property listings that you have Posted</p>
+                    <p class="font-italic">{% trans "Here are the property listings that you have Posted" %}</p>
                     <table class="table">
                         <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Property</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">View</th>
-                            <th scope="col">Cancel</th>
+                            <th scope="col">{% trans "Property" %}</th>
+                            <th scope="col">{% trans "Status" %}</th>
+                            <th scope="col">{% trans "View" %}</th>
+                            <th scope="col">{% trans "Cancel" %}</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -134,17 +134,17 @@
                         <tr>
                             <td>{{ posted.id}}</td>
                             <td>{{ posted.title }}</td>
-                            {% if posted.is_published %} <td class="btn btn-info">Published</td> {% else %}<td class="btn btn-danger">Not Published </td>{% endif %}
+                            {% if posted.is_published %} <td class="btn btn-info">{% trans "Published" %}</td> {% else %}<td class="btn btn-danger">{% trans "Not Published" %} </td>{% endif %}
                             <td>
-                                <a class="btn btn-dark" href="{% url 'listing' posted.id %}">View Post</a>
+                                <a class="btn btn-dark" href="{% url 'listing' posted.id %}">{% trans "View Post" %}</a>
                             </td>
                             {% if posted.is_published %}
                             <td>
-                                <a class="btn btn-danger" href="{% url 'listing' posted.id %}">Cancel Post</a>
+                                <a class="btn btn-danger" href="{% url 'listing' posted.id %}">{% trans "Cancel Post" %}</a>
                             </td>
                             {% else %}
                             <td>
-                                <a class="btn btn-info" href="{% url 'listing' posted.id %}">Post House</a>
+                                <a class="btn btn-info" href="{% url 'listing' posted.id %}">{% trans "Post House" %}</a>
                             </td>
                             {% endif %}
                         </tr>
@@ -152,18 +152,18 @@
                         </tbody>
                     </table>
                 {% else %}
-                    <p class="font-italic">You have not made any Posts</p>
+                    <p class="font-italic">{% trans "You have not made any Posts" %}</p>
                 {% endif %}
                 {% if is_realtor %}
                     {% if listings %}
-                        <p class="font-italic">Here are the property listings that you have inquired about</p>
+                        <p class="font-italic">{% trans "Here are the property listings that you have inquired about" %}</p>
                         <table class="table">
                             <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Property</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">View</th>
+                                <th scope="col">{% trans "Property" %}</th>
+                                <th scope="col">{% trans "Status" %}</th>
+                                <th scope="col">{% trans "View" %}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -171,16 +171,16 @@
                             <tr>
                                 <td>{{ list.id }}</td>
                                 <td>{{ list.title }}</td>
-                                <td class="btn btn-info">{% if list.is_published %} Published {% else %}Not Published {% endif %} </td>
+                                <td class="btn btn-info">{% if list.is_published %} {% trans "Published" %} {% else %}{% trans "Not Published" %} {% endif %} </td>
                                 <td>
-                                    <a class="btn btn-dark" href="{% url 'listing' list.id %}">View Listing</a>
+                                    <a class="btn btn-dark" href="{% url 'listing' list.id %}">{% trans "View Listing" %}</a>
                                 </td>
                             </tr>
                             {% endfor %}
                             </tbody>
                         </table>
                     {% else %}
-                        <p class="font-italic">You have not made any inquiries</p>
+                        <p class="font-italic">{% trans "You have not made any inquiries" %}</p>
                     {% endif %}
                 {% endif %}
             </div>

@@ -13,7 +13,7 @@ from django.utils.translation import get_language, activate, gettext
 
 def index(request):
     listings = Listing.objects.order_by('-list_date').filter(is_published=True)
-    paginator = Paginator(listings, 6)
+    paginator = Paginator(listings, 9)
     page = request.GET.get('page')
     paged_listings = paginator.get_page(page)
     context = {
@@ -25,12 +25,18 @@ def index(request):
 
 def listing(request, listing_id):
     listing = get_object_or_404(Listing, pk=listing_id)
+
+
     contact = None
-    if Contact.objects.filter(listing_id=listing_id).exists():
-        contact = Contact.objects.get(listing_id=listing_id)
     customer = False
     if request.user.groups.filter(name='customers').exists():
         customer = True
+        if Contact.objects.filter(listing_id=listing_id) is not None:
+            contacts = Contact.objects.filter(listing_id=listing_id, user_id=request.user.id)
+            if contacts:
+                contact = contacts[0]
+        else:
+            contact = None
     owner = False
     if request.user.is_authenticated:
         if listing.owner == request.user:

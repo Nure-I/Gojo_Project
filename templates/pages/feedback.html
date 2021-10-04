@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load i18n %}
 
 {% block content %}
 
@@ -8,16 +8,16 @@
     {% csrf_token %}
     <br><br>
     <div class="form-group">
-      <label for="fname" class="form-label">Name</label>
-      <input name="name" type="text" id="fname" class="form-control form-control-lg" placeholder="Your Name">
+      <label for="fname" class="form-label">{% trans "Name" %}</label>
+      <input name="name" type="text" id="fname" class="form-control form-control-lg" placeholder="{% trans "Your Name" %}">
 
-      <label for="exampleInputemail1" class="form-label">Email</label>
-      <input name="email" class="form-control form-control-lg" id="exampleInputemail1" type="text" placeholder="Your Email">
+      <label for="exampleInputemail1" class="form-label">{% trans "Email" %}</label>
+      <input name="email" class="form-control form-control-lg" id="exampleInputemail1" type="text" placeholder="{% trans "Your Email" %}">
 
-      <label for="subject" class="form-label">Subject</label>
-      <textarea name="subject" class="form-control form-control-lg" id="subject" rows="3" placeholder="Write Something"></textarea>
+      <label for="subject" class="form-label">{% trans "Subject" %}</label>
+      <textarea name="subject" class="form-control form-control-lg" id="subject" rows="3" placeholder="{% trans "Write Something" %}"></textarea>
 
-      <input type="submit" class="btn btn-success btn-lg mt-1 ml-4" value="Submit">
+      <input type="submit" class="btn btn-success btn-lg mt-1 ml-4" value="{% trans "Submit" %}">
     </div>
   </form>
 

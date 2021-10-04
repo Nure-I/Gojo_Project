@@ -19,7 +19,7 @@ class ContactusAdmin(admin.ModelAdmin):
 
 
 class PaymentAdmin(admin.ModelAdmin):
-    list_display = ('customer', 'house', 'payment', 'payment_date')
+    list_display = ('customer', 'house', 'payment_status', 'amount', 'payment_date')
 
 
 admin.site.register(Contact, ContactAdmin)

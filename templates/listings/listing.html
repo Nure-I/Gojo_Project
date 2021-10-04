@@ -3,7 +3,7 @@
 {% load humanize %}
 
 {% block title %} | {{ listing.title }} {% endblock %}
-
+{% load i18n %}
 {% block content %}
 <section id="showcase-inner" class="py-5 text-white">
     <div class="container">
@@ -23,10 +23,10 @@
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="{% url 'index' %}">Home</a>
+                    <a href="{% url 'index' %}">{% trans "Home" %}</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="{% url 'listings' %}">Listings</a>
+                    <a href="{% url 'listings' %}">{% trans "Listings" %}</a>
                 </li>
                 <li class="breadcrumb-item active">{{ listing.title }}</li>
             </ol>
@@ -40,7 +40,7 @@
 <!-- Listing -->
 <section id="listing" class="py-4">
     <div class="container">
-        <a href="{% url 'listings' %}" class="btn btn-light mb-4">Back To Listings</a>
+        <a href="{% url 'listings' %}" class="btn btn-light mb-4">{% trans "Back To Listings" %}</a>
         <div class="row">
             <div class="col-md-9">
                 <!-- Home Main Image -->
@@ -95,23 +95,23 @@
                     <div class="col-md-6">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item text-secondary">
-                                <i class="fas fa-money-bill-alt"></i> Asking Price:
+                                <i class="fas fa-money-bill-alt"></i> {% trans "Asking Price:" %}
                                 <span class="float-right">{{ listing.price | intcomma }} ETB {{ listing.price_term }} </span>
                             </li>
                             <li class="list-group-item text-secondary">
-                                <i class="fas fa-bed"></i> Bedrooms:
+                                <i class="fas fa-bed"></i> {% trans "Bedrooms:" %}
                                 <span class="float-right">{{ listing.bedrooms }}</span>
                             </li>
                             <li class="list-group-item text-secondary">
-                                <i class="fas fa-bath"></i> Bathrooms:
+                                <i class="fas fa-bath"></i>{% trans " Bathrooms:" %}
                                 <span class="float-right">{{ listing.bathrooms }}</span>
                             </li>
                             <li class="list-group-item text-secondary">
-                                <i class="fas fa-car"></i> Garage:
+                                <i class="fas fa-car"></i>{% trans " Garage:" %}
                                 <span class="float-right">{{ listing.garage }}</span>
                             </li>
                             <li class="list-group-item text-secondary">
-                                <i class="fas fa-award"></i> Owner:
+                                <i class="fas fa-award"></i>{% trans " Owner:" %}
                                 <span class="float-right">{{ listing.owner.first_name }} {{ listing.owner.last_name }}</span>
                             </li>
                         </ul>
@@ -119,20 +119,20 @@
                     <div class="col-md-6">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item text-secondary">
-                                <i class="fas fa-th-large"></i> Square Feet:
+                                <i class="fas fa-th-large"></i> {% trans "Square Feet:" %}
                                 <span class="float-right">{{ listing.sqft }}</span>
                             </li>
                             <li class="list-group-item text-secondary">
-                                <i class="fas fa-square"></i> Lot Size:
-                                <span class="float-right">{{ listing.lot_size }} Acres
+                                <i class="fas fa-square"></i> {% trans "Lot Size:" %}
+                                <span class="float-right">{{ listing.lot_size }} {% trans "Acres" %}
                   </span>
                             </li>
                             <li class="list-group-item text-secondary">
-                                <i class="fas fa-calendar"></i> Listing Date:
+                                <i class="fas fa-calendar"></i> {% trans "Listing Date:" %}
                                 <span class="float-right">{{ listing.list_date }}</span>
                             </li>
                             <li class="list-group-item text-secondary">
-                                <i class="fas fa-bed"></i> Realtor:
+                                <i class="fas fa-bed"></i> {% trans "Realtor:" %}
                                 <span class="float-right">{{ listing.realtor }}
                   </span>
                             </li>
@@ -161,64 +161,61 @@
                 <div class="card mb-3">
                     <img class="card-img-top" src="{{ listing.realtor.photo.url }}" alt="">
                     <div class="card-body">
-                        <h5 class="card-title">Property Realtor</h5>
+                        <h5 class="card-title">{% trans "Property Realtor" %}</h5>
                         <h6 class="text-secondary">{{ listing.realtor }}</h6>
                     </div>
                 </div>
                 {% if is_realtor %}
-                    {% if realtor == listing.realtor %}
+                    {% if realtor == listing.realtor or owner %}
                         {% if listing.is_published %}
                             <button class="btn-danger btn-block btn-lg" data-toggle="modal" data-target="#deleteModal">
-                                Delete Post
+                                {% trans "Delete Post" %}
                             </button>
                         {% else %}
                             <button class="btn-info btn-block btn-lg" data-toggle="modal" data-target="#postModal">
-                                Post House
+                                {% trans "Post House" %}
                             </button>
                         {% endif %}
                     {% else %}
-                    <button class="btn-primary btn-block btn-lg" data-toggle="modal" data-target="#inquiryModal">Make An
-                        Inquiry
+                    <button class="btn-primary btn-block btn-lg" data-toggle="modal" data-target="#inquiryModal">{% trans "Make An Inquiry" %}
                     </button>
 
                     {% endif %}
                 {% elif owner %}
                     {% if listing.is_published %}
                         <button class="btn-danger btn-block btn-lg" data-toggle="modal" data-target="#deleteModal">
-                                    Delete
+                                    {% trans "Delete" %}
                         </button>
                     {% else %}
                         <button class="btn-info btn-block btn-lg" data-toggle="modal" data-target="#postModal">
-                            Post House
+                            {% trans "Post House" %}
                         </button>
                     {% endif %}
                 {% elif customer %}
                     {% if contact.requested == 'Request Accepted' %}
                         {% if contact.paid == True %}
                             {% if listing.listed_for == 'For Sell' %}
-                            <button class="btn-secondary btn-block btn-lg" data-toggle="modal" data-target="">SOLD
+                            <button class="btn-secondary btn-block btn-lg" data-toggle="modal" data-target="">{% trans "SOLD" %}
                             </button>
                             {% else %}
-                            <button class="btn-secondary btn-block btn-lg" data-toggle="modal" data-target="#">RENTED
+                            <button class="btn-secondary btn-block btn-lg" data-toggle="modal" data-target="#">{% trans "RENTED" %}
                             </button>
                             {% endif %}
                         {% else %}
-                            <button class="btn-secondary btn-block btn-lg" data-toggle="modal" data-target="#yenepayModal">YenePay
+                            <button class="btn-secondary btn-block btn-lg" data-toggle="modal" data-target="#yenepayModal">{% trans "YenePay" %}
                             </button>
                             <hr>
                             <div id="paypal-button-container"></div>
                             <hr>
-                            <button class="btn-light btn-block btn-lg" data-toggle="modal" data-target="#yenepayModal">Pay With Bank
+                            <button class="btn-light btn-block btn-lg" data-toggle="modal" data-target="#yenepayModal">{% trans "Pay With Bank" %}
                             </button>
                         {% endif %}
                     {% else %}
-                        <button class="btn-primary btn-block btn-lg" data-toggle="modal" data-target="#inquiryModal">Make An
-                            Inquiry
+                        <button class="btn-primary btn-block btn-lg" data-toggle="modal" data-target="#inquiryModal">{% trans "Make An Inquiry" %}
                         </button>
                     {% endif %}
                 {% else %}
-                    <button class="btn-primary btn-block btn-lg" data-toggle="modal" data-target="#inquiryModal">Make An
-                        Inquiry
+                    <button class="btn-primary btn-block btn-lg" data-toggle="modal" data-target="#inquiryModal">{% trans "Make An Inquiry" %}
                     </button>
                 {% endif %}
             </div>
@@ -231,7 +228,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="inquiryModalLabel">Make An Inquiry</h5>
+                <h5 class="modal-title" id="inquiryModalLabel">{% trans "Make An Inquiry" %}</h5>
                 <button type="button" class="close" data-dismiss="modal">
                     <span>&times;</span>
                 </button>
@@ -247,29 +244,29 @@
                     <input type="hidden" name="realtor_email" value="{{ listing.realtor.email }}">
                     <input type="hidden" name="listing_id" value="{{ listing.id }}">
                     <div class="form-group">
-                        <label for="property_name" class="col-form-label">Property:</label>
+                        <label for="property_name" class="col-form-label">{% trans "Property:" %}</label>
                         <input type="text" name="listing" class="form-control" value="{{ listing.title }}">
                     </div>
                     <div class="form-group">
-                        <label for="name" class="col-form-label">Name:</label>
+                        <label for="name" class="col-form-label">{% trans "Name:" %}</label>
                         <input type="text" name="name" class="form-control" {% if user.is_authenticated %}
                                value="{{ user.first_name }} {{ user.last_name }}" {% endif %} required>
                     </div>
                     <div class="form-group">
-                        <label for="email" class="col-form-label">Email:</label>
+                        <label for="email" class="col-form-label">{% trans "Email:" %}</label>
                         <input type="email" name="email" class="form-control" {% if user.is_authenticated %}
                                value="{{ user.email }}" {% endif %} required>
                     </div>
                     <div class="form-group">
-                        <label for="phone" class="col-form-label">Phone:</label>
+                        <label for="phone" class="col-form-label">{% trans "Phone:" %}</label>
                         <input type="text" name="phone" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="message" class="col-form-label">Message:</label>
+                        <label for="message" class="col-form-label">{% trans "Message:" %}</label>
                         <textarea name="message" class="form-control"></textarea>
                     </div>
                     <hr>
-                    <input type="submit" value="Send" class="btn btn-block btn-secondary">
+                        <input type="submit" value="{% trans "Send" %}" class="btn btn-block btn-secondary">
                 </form>
             </div>
         </div>
@@ -282,7 +279,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="deleteModalLabel">Are You Sure?</h5>
+                <h5 class="modal-title" id="deleteModalLabel">{% trans "Are You Sure?" %}</h5>
                 <button type="button" class="close" data-dismiss="modal">
                     <span>&times;</span>
                 </button>
@@ -294,7 +291,7 @@
                     <input type="hidden" name="listing" value="{{ listing.title }}">
                     <hr>
                     <button type="button" class="btn btn-block btn-secondary" data-dismiss="modal">
-                        Cancel
+                        {% trans "Cancel" %}
                     </button>
                     <input type="submit" value="Delete" class="btn-danger btn-block btn-lg">
                 </form>
@@ -310,7 +307,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="postModalLabel">Are You Sure?</h5>
+                <h5 class="modal-title" id="postModalLabel">{% trans "Are You Sure?" %}</h5>
                 <button type="button" class="close" data-dismiss="modal">
                     <span>&times;</span>
                 </button>
@@ -321,7 +318,7 @@
                     <input type="hidden" name="listing" value="{{ listing.title }}">
                     <hr>
                     <button type="button" class="btn btn-block btn-danger" data-dismiss="modal">
-                        Cancel
+                        {% trans "Cancel" %}
                     </button>
                     <input type="submit" value="Post" class="btn-success btn-block btn-lg">
                 </form>
@@ -349,10 +346,10 @@
 
                     {% endfor %}
                     {{listing.title}}<br> {{listing.price}} ETB + 2% (Service Pay) <br>
-                    Total: {{Total_pay}}
+                    {% trans "Total:" %} {{Total_pay}}
                     <input type="submit" value="Pay with YenePay" class="btn-success btn-block btn-lg">
                     <button type="button" class="btn btn-block btn-danger" data-dismiss="modal">
-                        Cancel
+                        {% trans "Cancel" %}
                     </button>
 
                 </form>

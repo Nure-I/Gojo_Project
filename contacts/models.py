@@ -28,7 +28,9 @@ class Contact(models.Model):
 class Payment(models.Model):
     customer = models.ForeignKey(Contact, on_delete=models.DO_NOTHING, default=1)
     house = models.CharField(max_length=100)
-    payment = models.CharField(max_length=100, default="Not Payed")
+    transactionid = models.CharField(max_length=150, blank=True)
+    amount = models.CharField(max_length=100, blank=True)
+    payment_status = models.CharField(max_length=100, default="Not Payed")
     payment_date = models.DateTimeField(default=datetime.now, blank=True)
 
     def __str__(self):
