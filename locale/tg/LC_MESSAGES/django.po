@@ -1,0 +1,844 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-10 03:12+0300\n"
+"PO-Revision-Date: 2021-09-23 09:41+0000\n"
+"Last-Translator: Nuredin Ibrahim <nuredinibrahim40@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Translated-Using: django-rosetta 0.9.7\n"
+
+#: .\gojo\settings.py:168
+msgid "english"
+msgstr ""
+
+#: .\gojo\settings.py:169
+msgid "amharic"
+msgstr ""
+
+#: .\gojo\settings.py:170
+msgid "ትግርኛ"
+msgstr ""
+
+#: .\gojo\settings.py:171
+msgid "Afaan Oromo"
+msgstr ""
+
+#: .\listings\views.py:277 .\pages\views.py:46
+msgid "hello"
+msgstr ""
+
+#: .\templates\accounts\dashboard.html:10
+msgid "User Dashboard"
+msgstr ""
+
+#: .\templates\accounts\dashboard.html:11
+msgid "Manage your Gojo Account/"
+msgstr ""
+
+#: .\templates\accounts\dashboard.html:11
+msgid "Change Profile"
+msgstr ""
+
+#: .\templates\accounts\dashboard.html:11
+msgid "Change Password"
+msgstr ""
+
+#: .\templates\accounts\dashboard.html:24 .\templates\listings\listing.html:26
+#: .\templates\listings\listings.html:26 .\templates\listings\search.html:111
+#: .\templates\pages\about.html:27 .\templates\partials\_navbar.html:27
+#: .\templates\realtor\realtor.html:26
+msgid "Home"
+msgstr "ቤት"
+
+#: .\templates\accounts\dashboard.html:26
+msgid " Dashboard"
+msgstr ""
+
+#: .\templates\accounts\dashboard.html:39 .\templates\partials\_navbar.html:91
+#: .\templates\realtor\realtor.html:12
+msgid "Welcome"
+msgstr ""
+
+#: .\templates\accounts\dashboard.html:42
+msgid "Here are the property listings Contacted You"
+msgstr ""
+
+#: .\templates\accounts\dashboard.html:47
+#: .\templates\accounts\dashboard.html:86
+#: .\templates\accounts\dashboard.html:126
+#: .\templates\accounts\dashboard.html:169
+msgid "Property"
+msgstr ""
+
+#: .\templates\accounts\dashboard.html:48 .\templates\pages\contactus.html:27
+#: .\templates\pages\feedback.html:11
+msgid "Name"
+msgstr ""
+
+#: .\templates\accounts\dashboard.html:49
+#: .\templates\accounts\dashboard.html:87
+#: .\templates\accounts\dashboard.html:127
+#: .\templates\accounts\dashboard.html:170
+#, fuzzy
+#| msgid "State"
+msgid "Status"
+msgstr "ዞባ"
+
+#: .\templates\accounts\dashboard.html:50
+#: .\templates\accounts\dashboard.html:128
+#: .\templates\accounts\dashboard.html:171
+msgid "View"
+msgstr ""
+
+#: .\templates\accounts\dashboard.html:62
+#: .\templates\accounts\dashboard.html:181
+#, fuzzy
+#| msgid "Latest Listings"
+msgid "View Listing"
+msgstr "እዋናዊ ዝርዝር"
+
+#: .\templates\accounts\dashboard.html:66
+msgid "Accept"
+msgstr ""
+
+#: .\templates\accounts\dashboard.html:67
+msgid "Reject"
+msgstr ""
+
+#: .\templates\accounts\dashboard.html:77
+msgid "There is No Inquired Property For You"
+msgstr ""
+
+#: .\templates\accounts\dashboard.html:81
+#: .\templates\accounts\dashboard.html:164
+msgid "Here are the property listings that you have inquired about"
+msgstr ""
+
+#: .\templates\accounts\dashboard.html:100
+msgid "Payment Completed"
+msgstr ""
+
+#: .\templates\accounts\dashboard.html:101
+msgid "Download Invoice"
+msgstr ""
+
+#: .\templates\accounts\dashboard.html:103
+#: .\templates\accounts\dashboard.html:109
+msgid "Cancel Request"
+msgstr ""
+
+#: .\templates\accounts\dashboard.html:104
+msgid "payment methods"
+msgstr ""
+
+#: .\templates\accounts\dashboard.html:107
+msgid "Request Again"
+msgstr ""
+
+#: .\templates\accounts\dashboard.html:117
+#: .\templates\accounts\dashboard.html:188
+msgid "You have not made any inquiries"
+msgstr ""
+
+#: .\templates\accounts\dashboard.html:121
+msgid "Here are the property listings that you have Posted"
+msgstr ""
+
+#: .\templates\accounts\dashboard.html:129
+#: .\templates\listings\listing.html:294 .\templates\listings\listing.html:321
+#: .\templates\listings\listing.html:352
+msgid "Cancel"
+msgstr ""
+
+#: .\templates\accounts\dashboard.html:138
+#: .\templates\accounts\dashboard.html:179
+msgid "Published"
+msgstr ""
+
+#: .\templates\accounts\dashboard.html:138
+#: .\templates\accounts\dashboard.html:179
+msgid "Not Published"
+msgstr ""
+
+#: .\templates\accounts\dashboard.html:140
+msgid "View Post"
+msgstr ""
+
+#: .\templates\accounts\dashboard.html:144
+#, fuzzy
+#| msgid "About House Rent"
+msgid "House Rented"
+msgstr "ብዛዕባ ክራይ ገዛ"
+
+#: .\templates\accounts\dashboard.html:148
+msgid "Cancel Post"
+msgstr ""
+
+#: .\templates\accounts\dashboard.html:152
+#: .\templates\listings\addlisting.html:9 .\templates\listings\listing.html:176
+#: .\templates\listings\listing.html:191
+#, fuzzy
+#| msgid "About House Rent"
+msgid "Post House"
+msgstr "ብዛዕባ ክራይ ገዛ"
+
+#: .\templates\accounts\dashboard.html:160
+msgid "You have not made any Posts"
+msgstr ""
+
+#: .\templates\accounts\edit_profile.html:22
+msgid "Information"
+msgstr ""
+
+#: .\templates\accounts\edit_profile.html:25
+#: .\templates\accounts\register.html:20
+msgid "First Name"
+msgstr ""
+
+#: .\templates\accounts\edit_profile.html:29
+#: .\templates\accounts\register.html:30
+msgid "Last Name"
+msgstr ""
+
+#: .\templates\accounts\edit_profile.html:34
+msgid "Update Profile"
+msgstr ""
+
+#: .\templates\accounts\edit_profile.html:40
+msgid "UserName"
+msgstr ""
+
+#: .\templates\accounts\edit_profile.html:44
+#: .\templates\accounts\register.html:50 .\templates\pages\contactus.html:33
+#: .\templates\pages\feedback.html:14
+msgid "Email"
+msgstr ""
+
+#: .\templates\accounts\login.html:12 .\templates\partials\_navbar.html:126
+msgid "Login"
+msgstr ""
+
+#: .\templates\accounts\login.html:20 .\templates\accounts\register.html:40
+msgid "Username"
+msgstr ""
+
+#: .\templates\accounts\login.html:30 .\templates\accounts\register.html:60
+msgid "Password"
+msgstr ""
+
+#: .\templates\accounts\login.html:46
+msgid "Don't have an Account?"
+msgstr ""
+
+#: .\templates\accounts\login.html:46 .\templates\accounts\register.html:12
+#: .\templates\partials\_navbar.html:113
+msgid "Register"
+msgstr ""
+
+#: .\templates\accounts\register.html:70
+msgid "Confirm Password"
+msgstr ""
+
+#: .\templates\listings\addlisting.html:25
+#: .\templates\listings\addlisting.html:30
+msgid "Title"
+msgstr ""
+
+#: .\templates\listings\addlisting.html:35
+#: .\templates\listings\addlisting.html:40
+msgid "Address"
+msgstr ""
+
+#: .\templates\listings\addlisting.html:47
+#: .\templates\listings\addlisting.html:52 .\templates\listings\search.html:52
+#: .\templates\pages\index.html:51
+msgid "City"
+msgstr "ከተማ"
+
+#: .\templates\listings\addlisting.html:58 .\templates\listings\search.html:56
+#, fuzzy
+#| msgid "Region (All)"
+msgid "Region"
+msgstr "ዞባ (ኵሉ)"
+
+#: .\templates\listings\addlisting.html:60 .\templates\listings\search.html:58
+#: .\templates\pages\index.html:58
+msgid "Region (All)"
+msgstr "ዞባ (ኵሉ)"
+
+#: .\templates\listings\addlisting.html:67
+#: .\templates\listings\addlisting.html:72
+msgid "Zip Code"
+msgstr ""
+
+#: .\templates\listings\addlisting.html:80
+#, fuzzy
+#| msgid "Bedrooms"
+msgid "BedRooms"
+msgstr "መደቀሲ ኽፍልታት"
+
+#: .\templates\listings\addlisting.html:85 .\templates\listings\search.html:72
+#: .\templates\pages\index.html:68
+msgid "Bedrooms"
+msgstr "መደቀሲ ኽፍልታት"
+
+#: .\templates\listings\addlisting.html:90
+#, fuzzy
+#| msgid "Bathrooms: "
+msgid "BathRooms"
+msgstr "መሕጸብ ነብሲ ፦"
+
+#: .\templates\listings\addlisting.html:95
+#, fuzzy
+#| msgid "Bathrooms: "
+msgid "Bathrooms"
+msgstr "መሕጸብ ነብሲ ፦"
+
+#: .\templates\listings\addlisting.html:100
+#: .\templates\listings\addlisting.html:105
+#, fuzzy
+#| msgid "Garage: "
+msgid "Garage"
+msgstr "ጋራጅ ፦"
+
+#: .\templates\listings\addlisting.html:112
+#, fuzzy
+#| msgid "Sqft: "
+msgid "Sqft"
+msgstr "ስኩፍት ፦"
+
+#: .\templates\listings\addlisting.html:117
+msgid "Square Feet"
+msgstr ""
+
+#: .\templates\listings\addlisting.html:122
+#: .\templates\listings\addlisting.html:127
+msgid "Lot Size"
+msgstr ""
+
+#: .\templates\listings\addlisting.html:132 .\templates\listings\search.html:15
+#, fuzzy
+#| msgid "House Type"
+msgid "Property Type"
+msgstr "ዓይነት ቤት"
+
+#: .\templates\listings\addlisting.html:134 .\templates\listings\search.html:17
+#, fuzzy
+#| msgid "House Type (All)"
+msgid "Property Type (All)"
+msgstr "ዓይነት ቤት (ኵሉ)"
+
+#: .\templates\listings\addlisting.html:142
+#: .\templates\listings\addlisting.html:147
+msgid "Price"
+msgstr ""
+
+#: .\templates\listings\addlisting.html:154
+#: .\templates\listings\addlisting.html:156
+msgid "Price Negotiability"
+msgstr ""
+
+#: .\templates\listings\addlisting.html:164
+#: .\templates\listings\addlisting.html:166
+msgid "Listed For"
+msgstr ""
+
+#: .\templates\listings\addlisting.html:175
+msgid "description"
+msgstr ""
+
+#: .\templates\listings\addlisting.html:180
+msgid "Description"
+msgstr ""
+
+#: .\templates\listings\addlisting.html:186
+#: .\templates\listings\addlisting.html:191
+msgid "Main Image"
+msgstr ""
+
+#: .\templates\listings\addlisting.html:197
+#, fuzzy
+#| msgid "More Info"
+msgid "More Images"
+msgstr "ዝያዳ ሓበሬታ"
+
+#: .\templates\listings\addlisting.html:201
+msgid "Image 1"
+msgstr ""
+
+#: .\templates\listings\addlisting.html:210
+msgid "Image 2"
+msgstr ""
+
+#: .\templates\listings\addlisting.html:219
+msgid "Image 3"
+msgstr ""
+
+#: .\templates\listings\addlisting.html:228
+msgid "Image 4"
+msgstr ""
+
+#: .\templates\listings\addlisting.html:237
+msgid "Image 5"
+msgstr ""
+
+#: .\templates\listings\addlisting.html:246
+msgid "Image 6"
+msgstr ""
+
+#: .\templates\listings\addlisting.html:256
+msgid "Add Property"
+msgstr ""
+
+#: .\templates\listings\listing.html:29
+#, fuzzy
+#| msgid "Latest Listings"
+msgid "Listings"
+msgstr "እዋናዊ ዝርዝር"
+
+#: .\templates\listings\listing.html:43
+#, fuzzy
+#| msgid "Latest Listings"
+msgid "Back To Listings"
+msgstr "እዋናዊ ዝርዝር"
+
+#: .\templates\listings\listing.html:98
+msgid "Asking Price:"
+msgstr ""
+
+#: .\templates\listings\listing.html:102 .\templates\listings\listings.html:65
+#: .\templates\listings\search.html:151 .\templates\realtor\realtor.html:65
+#, fuzzy
+#| msgid "Bedrooms: "
+msgid "Bedrooms:"
+msgstr "መደቀሲ  ፦"
+
+#: .\templates\listings\listing.html:106
+#, fuzzy
+#| msgid "Bathrooms: "
+msgid " Bathrooms:"
+msgstr "መሕጸብ ነብሲ ፦"
+
+#: .\templates\listings\listing.html:110
+#, fuzzy
+#| msgid "Garage: "
+msgid " Garage:"
+msgstr "ጋራጅ ፦"
+
+#: .\templates\listings\listing.html:114
+msgid " Owner:"
+msgstr ""
+
+#: .\templates\listings\listing.html:122
+msgid "Square Feet:"
+msgstr ""
+
+#: .\templates\listings\listing.html:126
+msgid "Lot Size:"
+msgstr ""
+
+#: .\templates\listings\listing.html:127
+msgid "Acres"
+msgstr ""
+
+#: .\templates\listings\listing.html:131
+msgid "Listing Date:"
+msgstr ""
+
+#: .\templates\listings\listing.html:135
+#, fuzzy
+#| msgid "Realtor"
+msgid "Realtor:"
+msgstr "ኣረማኒ"
+
+#: .\templates\listings\listing.html:164
+#, fuzzy
+#| msgid "Realtor"
+msgid "Property Realtor"
+msgstr "ኣረማኒ"
+
+#: .\templates\listings\listing.html:172
+msgid "Delete Post"
+msgstr ""
+
+#: .\templates\listings\listing.html:180 .\templates\listings\listing.html:214
+#: .\templates\listings\listing.html:218 .\templates\listings\listing.html:231
+msgid "Make An Inquiry"
+msgstr ""
+
+#: .\templates\listings\listing.html:187
+msgid "Delete"
+msgstr ""
+
+#: .\templates\listings\listing.html:198
+msgid "SOLD"
+msgstr ""
+
+#: .\templates\listings\listing.html:201
+msgid "RENTED"
+msgstr ""
+
+#: .\templates\listings\listing.html:205
+msgid "YenePay"
+msgstr ""
+
+#: .\templates\listings\listing.html:210
+msgid "Pay With Bank"
+msgstr ""
+
+#: .\templates\listings\listing.html:247 .\templates\listings\listing.html:383
+msgid "Property:"
+msgstr ""
+
+#: .\templates\listings\listing.html:251 .\templates\listings\listing.html:387
+msgid "Name:"
+msgstr ""
+
+#: .\templates\listings\listing.html:256 .\templates\listings\listing.html:392
+msgid "Email:"
+msgstr ""
+
+#: .\templates\listings\listing.html:261
+msgid "Phone:"
+msgstr ""
+
+#: .\templates\listings\listing.html:265
+msgid "Message:"
+msgstr ""
+
+#: .\templates\listings\listing.html:269 .\templates\listings\listing.html:401
+msgid "Send"
+msgstr ""
+
+#: .\templates\listings\listing.html:282 .\templates\listings\listing.html:310
+msgid "Are You Sure?"
+msgstr ""
+
+#: .\templates\listings\listing.html:349
+msgid "Total:"
+msgstr ""
+
+#: .\templates\listings\listing.html:367
+msgid "Pay By Bank"
+msgstr ""
+
+#: .\templates\listings\listing.html:397
+msgid "Upload Invoice"
+msgstr ""
+
+#: .\templates\listings\listings.html:12
+msgid "Browse Our Properties"
+msgstr ""
+
+#: .\templates\listings\listings.html:28 .\templates\listings\search.html:114
+#: .\templates\realtor\realtor.html:28
+#, fuzzy
+#| msgid "Featured Listings"
+msgid "Browse Listings"
+msgstr "ዝርዝር ስማት"
+
+#: .\templates\listings\listings.html:59 .\templates\listings\search.html:145
+#: .\templates\realtor\realtor.html:59
+#, fuzzy
+#| msgid "Sqft: "
+msgid "Sqft:"
+msgstr "ስኩፍት ፦"
+
+#: .\templates\listings\listings.html:61 .\templates\listings\search.html:147
+#: .\templates\realtor\realtor.html:61
+#, fuzzy
+#| msgid "Garage: "
+msgid "Garage:"
+msgstr "ጋራጅ ፦"
+
+#: .\templates\listings\listings.html:67 .\templates\listings\search.html:153
+#: .\templates\realtor\realtor.html:67
+#, fuzzy
+#| msgid "Bathrooms: "
+msgid "Bathrooms:"
+msgstr "መሕጸብ ነብሲ ፦"
+
+#: .\templates\listings\listings.html:79 .\templates\listings\search.html:165
+#: .\templates\pages\index.html:150 .\templates\realtor\realtor.html:79
+msgid "More Info"
+msgstr "ዝያዳ ሓበሬታ"
+
+#: .\templates\listings\listings.html:86 .\templates\listings\search.html:172
+#: .\templates\pages\index.html:157 .\templates\realtor\realtor.html:87
+msgid "No Listings Available"
+msgstr "ዝርዝር ኣይርከብን እዩ"
+
+#: .\templates\listings\search.html:30 .\templates\listings\search.html:32
+#: .\templates\pages\index.html:35
+msgid "Search For"
+msgstr "ድለ"
+
+#: .\templates\listings\search.html:46 .\templates\pages\index.html:45
+msgid "Keywords"
+msgstr "ቀንዲ ቓላት"
+
+#: .\templates\listings\search.html:47 .\templates\pages\index.html:47
+msgid "Keyword (Pool, Garage, etc)"
+msgstr "ቀንዲ ቓል (ጋብላ ጋራጅ ወዘተ)"
+
+#: .\templates\listings\search.html:74
+#, fuzzy
+#| msgid "Bedrooms (All)"
+msgid "Bedrooms (Any)"
+msgstr "መደቀሲ ኽፍልታት (ኵሉ)"
+
+#: .\templates\listings\search.html:86
+#, fuzzy
+#| msgid "Max Price (Any)"
+msgid "Max Price (All)"
+msgstr "ዝለዓለ ዋጋ (ዝዀነ ይኹን)"
+
+#: .\templates\listings\search.html:97 .\templates\pages\index.html:85
+msgid "Submit form"
+msgstr "ፎርም ኣቕርብ"
+
+#: .\templates\listings\search.html:116
+msgid "Search Results"
+msgstr ""
+
+#: .\templates\pages\about.html:12
+msgid "About House Rent"
+msgstr "ብዛዕባ ክራይ ገዛ"
+
+#: .\templates\pages\about.html:14
+msgid ""
+"Gojo House Rental management involves an understanding of operating expenses "
+"and budgeting."
+msgstr "ምምሕዳር ክራይ ገዛ ጎጆ ብዛዕባ ኣሰራርሓ ወጻኢታትን ባጀትን ምርዳእ ዘጠቓልል ኢዩ ።"
+
+#: .\templates\pages\about.html:29
+msgid "About"
+msgstr "ብዛዕባ"
+
+#: .\templates\pages\about.html:39
+msgid "We Search For The Perfect Home"
+msgstr "ፍጽምቲ ቤት ነናዲ"
+
+#: .\templates\pages\about.html:40
+msgid ""
+"House rental management is utilized for any type of rental property, "
+"including residential rentals or commercial real estate."
+msgstr ""
+"ምምሕዳር ክራይ ገዛ ንዝዀነ ይኹን ዓይነት ንብረት ክራይ እንተላይ ንመንበሪ ገዛ ወይ ንንግዳዊ ዘይንቀሳቐስ ንብረት እዩ "
+"ዚጠቅም ።"
+
+#: .\templates\pages\about.html:43
+msgid ""
+" House rental management involves an understanding of operating expenses and "
+"budgeting. From this information, appropriate rental rates are set, balanced "
+"by the current market and what it will support in the way of rents. A firm "
+"knowledge of the area and competitive rental properties is required."
+msgstr ""
+"ምምሕዳር ክራይ ገዛ ብዛዕባ ኣሰራርሓ ወጻኢታትን ባጀትን ምርዳእ ዘጠቓልል ኢዩ ። ካብዚ ሓበሬታ እዚ ተበጊስካ ግቡእ "
+"ዋጋታት ክራይ በዚ ሕጂ ዘሎ ዕዳጋን ኣብ መገዲ ክራይ እንታይ ከም ዝድግፍን ሚዛኑ ዝሓለወ ኢዩ ። ብዛዕባ እቲ ኸባቢ "
+"ጽኑዕ ፍልጠትን ውድድር ዘለዎ ንብረት ክራይን የድሊ ።"
+
+#: .\templates\pages\about.html:56
+msgid "Seller Of The Month"
+msgstr "ሸያጢ እታ ወርሒ"
+
+#: .\templates\pages\about.html:73
+msgid "We Work For You"
+msgstr "ምሳኻ ንሰርሕ"
+
+#: .\templates\pages\about.html:74
+msgid ""
+" Rental managers are generally responsible for the day-to-day operations of "
+"the real estate, from screening tenants to arranging for repairs and "
+"maintenance. Owners pay Rental managers a fee or a percentage of the rent "
+"generated by the property."
+msgstr ""
+"ኣካየድቲ ክራይ ነቲ ዘይንቀሳቐስ ንብረት መዓልታዊ ዚዓዩሉ ዕዮ ማለት ነቶም ተኻረይቲ ኻብ ምርመራ ኣትሒዝካ ኽሳዕ ጽገናን "
+"ምክንኻንን ናይ ምድላው ሓላፍነት ኣለዎም። ዋናታት ንኣመሓደርቲ ክራይ ክፍሊት ወይ ሚእታዊት እቲ ኻብቲ ንብረት እተረኽበ "
+"ክራይ ገዛ ይኸፍሉ እዮም ።"
+
+#: .\templates\pages\about.html:78
+msgid "View Our Featured Listings"
+msgstr "ነቲ ኣብ ገጽና ዘሎ ዝርዝር ርኣዮ"
+
+#: .\templates\pages\about.html:85
+msgid "Our Team"
+msgstr "ጕጅለና"
+
+#: .\templates\pages\about.html:97
+msgid "Realtor"
+msgstr "ኣረማኒ"
+
+#: .\templates\pages\about.html:106
+msgid "No realtors available"
+msgstr "ኣረይቲ ኣይርከብን እዩ"
+
+#: .\templates\pages\contactus.html:16
+msgid "Get in touch with us"
+msgstr ""
+
+#: .\templates\pages\contactus.html:26
+msgid "Full Name"
+msgstr ""
+
+#: .\templates\pages\contactus.html:32
+msgid "Email Address"
+msgstr ""
+
+#: .\templates\pages\contactus.html:38 .\templates\pages\contactus.html:39
+#: .\templates\pages\feedback.html:17
+msgid "Subject"
+msgstr ""
+
+#: .\templates\pages\contactus.html:44 .\templates\pages\contactus.html:45
+msgid "Message"
+msgstr ""
+
+#: .\templates\pages\contactus.html:50
+msgid "Send Message"
+msgstr ""
+
+#: .\templates\pages\feedback.html:12
+msgid "Your Name"
+msgstr ""
+
+#: .\templates\pages\feedback.html:15
+msgid "Your Email"
+msgstr ""
+
+#: .\templates\pages\feedback.html:18
+msgid "Write Something"
+msgstr ""
+
+#: .\templates\pages\feedback.html:20
+#, fuzzy
+#| msgid "Submit form"
+msgid "Submit"
+msgstr "ፎርም ኣቕርብ"
+
+#: .\templates\pages\index.html:15
+msgid "House Searching Just Got So Easy"
+msgstr "ምንዳይ ቤት ቀሊል እዩ ነይሩ"
+
+#: .\templates\pages\index.html:17
+msgid ""
+"House rental management is the operation, control, maintenance, and "
+"oversight of houses and physical property. This can include residential, "
+"commercial, and land real estate."
+msgstr ""
+"ምምሕዳር ክራይ ገዛ ኣባይትን ኣካላዊ ንብረትን ምዕያይን ምቍጽጻርን ምክንኻንን ምቍጽጻርን እዩ ። እዚ ኸኣ መንበሪ ንግዲ "
+"ከምኡውን ዘይንቀሳቐስ ንብረት ዜጠቓልል ኪኸውን ይኽእል እዩ ።"
+
+#: .\templates\pages\index.html:22
+msgid "House Type"
+msgstr "ዓይነት ቤት"
+
+#: .\templates\pages\index.html:24
+msgid "House Type (All)"
+msgstr "ዓይነት ቤት (ኵሉ)"
+
+#: .\templates\pages\index.html:56
+msgid "State"
+msgstr "ዞባ"
+
+#: .\templates\pages\index.html:70
+msgid "Bedrooms (All)"
+msgstr "መደቀሲ ኽፍልታት (ኵሉ)"
+
+#: .\templates\pages\index.html:78
+msgid "Max Price (Any)"
+msgstr "ዝለዓለ ዋጋ (ዝዀነ ይኹን)"
+
+#: .\templates\pages\index.html:99
+msgid "Latest Listings"
+msgstr "እዋናዊ ዝርዝር"
+
+#: .\templates\pages\index.html:124
+msgid "Sqft: "
+msgstr "ስኩፍት ፦"
+
+#: .\templates\pages\index.html:127
+msgid "Garage: "
+msgstr "ጋራጅ ፦"
+
+#: .\templates\pages\index.html:132
+msgid "Bedrooms: "
+msgstr "መደቀሲ  ፦"
+
+#: .\templates\pages\index.html:135
+msgid "Bathrooms: "
+msgstr "መሕጸብ ነብሲ ፦"
+
+#: .\templates\pages\index.html:171
+msgid "Consulting Services"
+msgstr "ኣገልግሎት ምኽሪ"
+
+#: .\templates\pages\index.html:172
+msgid ""
+"We work with leading organizations across the private, public and social "
+"sectors. Our scale, scope, and knowledge allow us to address problems that "
+"no one else can."
+msgstr ""
+
+#: .\templates\pages\index.html:177
+msgid "Propery Management"
+msgstr "ግቡእ ምምሕዳር"
+
+#: .\templates\pages\index.html:178
+msgid ""
+"Property management is the daily oversight of residential, commercial, or "
+"industrial real estate by a third-party contractor. Generally, property "
+"managers take responsibility for day-to-day repairs of properties."
+msgstr ""
+
+#: .\templates\pages\index.html:183
+msgid "Renting & Selling"
+msgstr "ክራይን ምሻጥን"
+
+#: .\templates\pages\index.html:184
+msgid ""
+"an affordable home to someone within the parish or adjoining parish who "
+"meets the eligibility criteria as set out in policy."
+msgstr ""
+
+#: .\templates\partials\_navbar.html:36
+msgid "About Us"
+msgstr "ብዛዕባና"
+
+#: .\templates\partials\_navbar.html:46
+msgid "Featured Listings"
+msgstr "ዝርዝር ስማት"
+
+#: .\templates\partials\_navbar.html:54
+msgid "Language"
+msgstr "ቋንቋ"
+
+#: .\templates\partials\_navbar.html:81
+#, fuzzy
+#| msgid "Latest Listings"
+msgid "Post Listing"
+msgstr "እዋናዊ ዝርዝር"
+
+#: .\templates\partials\_navbar.html:97
+msgid "Logout"
+msgstr ""
+
+#: .\templates\partials\_topbar.html:20
+msgid "FeedBack"
+msgstr ""
+
+#: .\templates\partials\_topbar.html:21
+msgid "Contact Us"
+msgstr ""
