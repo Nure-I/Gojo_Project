@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Contact, Feedback, Contactus, Payment
+from .models import Contact, Feedback, Contactus, Payment, Payment_invoice
 
 
 class ContactAdmin(admin.ModelAdmin):
@@ -21,8 +21,12 @@ class ContactusAdmin(admin.ModelAdmin):
 class PaymentAdmin(admin.ModelAdmin):
     list_display = ('customer', 'house', 'payment_status', 'amount', 'payment_date')
 
+class Payment_invoiceAdmin(admin.ModelAdmin):
+    list_display = ('name', 'listing', 'email', 'payment_date')
+
 
 admin.site.register(Contact, ContactAdmin)
 admin.site.register(Feedback, FeedbackAdmin)
 admin.site.register(Contactus, ContactusAdmin)
 admin.site.register(Payment, PaymentAdmin)
+admin.site.register(Payment_invoice, Payment_invoiceAdmin)

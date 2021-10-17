@@ -207,7 +207,7 @@
                             <hr>
                             <div id="paypal-button-container"></div>
                             <hr>
-                            <button class="btn-light btn-block btn-lg" data-toggle="modal" data-target="#yenepayModal">{% trans "Pay With Bank" %}
+                            <button class="btn-info btn-block btn-lg" data-toggle="modal" data-target="#bankModal">{% trans "Pay With Bank" %}
                             </button>
                         {% endif %}
                     {% else %}
@@ -359,7 +359,53 @@
         </div>
     </div>
 </div>
- <script src="https://www.paypal.com/sdk/js?client-id=AXahcq9YrJSG5Jp0Ch78THwr0tO815mJPX_vSRejwp-vHPq2X9r4lyLm4Bg07pajlL6YwE1Cx9sQ2c-F&currency=ETB"></script>
+
+<div class="modal fade" id="bankModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="bankModalLabel">{% trans "Pay By Bank" %}</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{% url 'upload_invoice' %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% if user.is_authenticated %}
+                    <input type="hidden" name="user_id" value="{{ user.id }}">
+                    {% else %}
+                    <input type="hidden" name="user_id" value="0">
+                    {% endif %}
+                    <input type="hidden" name="realtor_email" value="{{ listing.realtor.email }}">
+                    <input type="hidden" name="listing_id" value="{{ listing.id }}">
+                    <div class="form-group">
+                        <label for="property_name" class="col-form-label">{% trans "Property:" %}</label>
+                        <input type="text" name="listing" class="form-control" value="{{ listing.title }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-form-label">{% trans "Name:" %}</label>
+                        <input type="text" name="name" class="form-control" {% if user.is_authenticated %}
+                               value="{{ user.first_name }} {{ user.last_name }}" {% endif %} required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="col-form-label">{% trans "Email:" %}</label>
+                        <input type="email" name="email" class="form-control" {% if user.is_authenticated %}
+                               value="{{ user.email }}" {% endif %} required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone" class="col-form-label">{% trans "Upload Invoice" %}</label>
+                        <input type="file" name="img" class="form-control">
+                    </div>
+                    <hr>
+                        <input type="submit" value="{% trans "Send" %}" class="btn btn-block btn-secondary">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+ <script src="https://www.paypal.com/sdk/js?client-id=AXahcq9YrJSG5Jp0Ch78THwr0tO815mJPX_vSRejwp-vHPq2X9r4lyLm4Bg07pajlL6YwE1Cx9sQ2c-F&currency=USD"></script>
 <script>
         function getCookie(name) {
             let cookieValue = null;
@@ -377,7 +423,7 @@
             return cookieValue;
         }
         const csrftoken = getCookie('csrftoken');
-        var price = '{{listing.price}}'
+        var price = '{{convert_pay}}'
         var listingId = '{{contact.listing_id}}'
 
         function completeOrder(){
@@ -414,11 +460,11 @@
                     console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
                     var transaction = orderData.purchase_units[0].payments.captures[0];
                     alert('Transaction '+ transaction.status + ': ' + transaction.id + '\n\nCheck Your Email For More Info');
-
+                    JSON.stringify({transID: transaction.id})
                     // Replace the above to show a success message within this page, e.g.
-                    // const element = document.getElementById('paypal-button-container');
-                    // element.innerHTML = '';
-                    // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+                    const element = document.getElementById('paypal-button-container');
+                    element.innerHTML = '';
+                    element.innerHTML = '<h3>Thank you for your payment!</h3>';
                     // Or go to another URL:  actions.redirect('thank_you.html');
                 });
             }

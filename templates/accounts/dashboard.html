@@ -98,6 +98,7 @@
                             {% if contact.requested == 'Request Accepted' %}
                                 {% if contact.paid == True %}
                                     <a class="btn btn-success" href="" >{% trans "Payment Completed" %}</a>
+                                    <a class="btn btn-info" href="{% url 'download_invoice' contact.id %}" >{% trans "Download Invoice" %}</a>
                                 {% else %}
                                     <a class="btn btn-warning" href="{% url 'cancel' contact.id %}" >{% trans "Cancel Request" %}</a>
                                     <a class="btn btn-success" href="{% url 'listing' contact.listing_id %}" >{% trans "payment methods" %}</a>
@@ -138,7 +139,11 @@
                             <td>
                                 <a class="btn btn-dark" href="{% url 'listing' posted.id %}">{% trans "View Post" %}</a>
                             </td>
-                            {% if posted.is_published %}
+                            {% if posted.is_published == False %}
+                            <td>
+                                <a class="btn btn-success" href="" >{% trans "House Rented" %}</a>
+                                </td>
+                            {% elif posted.is_published %}
                             <td>
                                 <a class="btn btn-danger" href="{% url 'listing' posted.id %}">{% trans "Cancel Post" %}</a>
                             </td>

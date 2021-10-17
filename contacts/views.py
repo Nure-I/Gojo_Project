@@ -1,12 +1,21 @@
+import pytesseract
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.core.mail import send_mail
-from .models import Contact, Feedback, Contactus, Payment
+from .models import Contact, Feedback, Contactus, Payment, Payment_invoice
 from listings.models import Listing
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 import json
+import io
+from xhtml2pdf import pisa
+from django.template.loader import get_template
+from django.template import Context
+import pytesseract as tess
+
+tess.pytesseract.tesseract_cmd = r'C:\Users\HUMBLE\AppData\Local\Programs\Tesseract-OCR\tesseract.exe'
+from PIL import Image
 
 
 def contact(request):
@@ -154,23 +163,28 @@ def checkout(request, checkout_id):
 def payment_complete(request):
     body = json.loads(request.body)
     print("BODY:", body)
-    contact = Contact.objects.get(listing_id=body['listingID'])
+    contact = Contact.objects.get(listing_id=body['listingID'], user_id=request.user.id)
     listing = Listing.objects.get(title=contact.listing)
     print(contact)
     print(contact.listing)
+    listing.is_published = False
+    listing.save()
+    contact.paid = True
+    contact.save()
     payment = Payment()
     payment.customer = contact
     payment.house = contact.listing
     payment.amount = listing.price
-    payment.payment = 'Payment Completed'
+    payment.payment_method = "PayPal"
+    payment.payment_status = 'Payment Completed'
     payment.save()
-    send_mail(
-        'Property Listing Inquiry',
-        'There has been an inquiry for ' + contact.listing + '. Sign into the admin panel for more info ',
-        'nuredinibrahim40@gmail.com',
-        [contact.email, 'ibrahimsaladin1@gmail.com'],
-        fail_silently=False
-    )
+    # send_mail(
+    #     'Payment Completed Successfully',
+    #     'Your Payment for ' + contact.listing + '. with Amount of ' + listing.price + 'ETB has Payment Successfully Completed',
+    #     'nuredinibrahim40@gmail.com',
+    #     [contact.email, 'ibrahimsaladin1@gmail.com'],
+    #     fail_silently=False
+    # )
 
     messages.success(request, 'Payment successfully completed')
     return JsonResponse('payment Completed!', safe=False)
@@ -226,3 +240,74 @@ def success(request, success_id):
 
 def cancel_pay(request):
     return redirect('')
+
+
+def render_to_pdf(template_src, context_dict):
+    template = get_template(template_src)
+    html = template.render(context_dict)
+    result = io.BytesIO()
+    pdf = pisa.pisaDocument(io.BytesIO(html.encode("UTF-8")), result)
+    if not pdf.err:
+        return HttpResponse(result.getvalue(), content_type='application/pdf')
+    return
+
+
+def download_invoice(request, house_id):
+    print(house_id)
+    contact = Contact.objects.get(pk=house_id)
+    print(contact)
+    listing = Listing.objects.get(title=contact.listing)
+    print(listing)
+    total_amount = (int(listing.price * 0.02) + listing.price)
+    service_pay = (int(listing.price * 0.02))
+    context = {
+        'orderDate': contact.contact_date,
+        'customerName': request.user,
+        'customerEmail': contact.email,
+        'customerMobile': contact.phone,
+        'shipmentAddress': listing.address,
+        'orderStatus': contact.requested,
+
+        'productName': listing.title,
+        'productType': listing.property,
+        'productPrice': listing.price,
+        'productDescription': listing.description,
+        'total_amount': total_amount,
+        'service_pay': service_pay
+
+    }
+    return render_to_pdf('payment/download_invoice.html', context)
+
+
+def image_convert(request):
+    if request.method == 'POST':
+        listing_id = request.POST['listing_id']
+        listing = request.POST['listing']
+        name = request.POST['name']
+        email = request.POST['email']
+        realtor_email = request.POST['realtor_email']
+        user_id = request.user.id
+        img = request.FILES['img']
+        has_contacted = False
+        if has_contacted:
+            messages.error(request, 'You have already Send Your Invoice')
+            return redirect('/listings/' + listing_id)
+        else:
+            # payment_invoice = Payment_invoice(listing=listing, listing_id=listing_id, name=name, email=email, image=img)
+            # payment_invoice.save()
+            messages.success(request, 'Your Invoice has been submitted, Please Wait Your invoice is being verified')
+        # payment_data = Payment_invoice.objects.get(image=img)
+        # print(payment_data.image)
+        image = Image.open(r'C:\Users\HUMBLE\PycharmProjects\Gojo\gojo\media\invoice\{}'.format(img))
+        print(image)
+        text = tess.image_to_string(image)
+        print(listing)
+        print(text)
+        with open('text.txt', 'w') as f:
+            f.write(text)
+        word = open("text.txt")
+        for line in word:
+            if line.startswith("Branch"):
+                print(line)
+
+    return redirect('dashboard')

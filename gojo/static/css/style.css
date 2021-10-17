@@ -32,6 +32,7 @@ position:absolute;
 #showcase {
   background: url(../img/showcase.jpg) no-repeat top center fixed;
   position: relative;
+  background-size: cover;
   min-height: 650px;
   color: #fff;
   padding-top: 6rem; }
@@ -85,8 +86,14 @@ position:absolute;
   position: relative; }
 
 #login {
+
   background: url(../img/building.jpg) no-repeat top center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
   min-height: 300px;
+  min-width:300px;
   position: relative;
   overflow: hidden; }
   #services::before {
@@ -98,8 +105,9 @@ position:absolute;
     width: 100%;
     background: rgba(32, 134, 107, 0.8); }
 #post {
-  background: url(../img/register3.jpg) no-repeat center fixed;
+  background: url(../img/addis-ababa.jpg) no-repeat center;
   position: relative;
+  background-size: cover;
   min-height: 800px;
   color: #fff;
   padding-top: 6rem; }
@@ -114,7 +122,7 @@ position:absolute;
     left: 0;
     min-height: 400px;
     width: 100%;
-    background: rgba(51, 51, 51, 0.8); }
+    background: rgba(51, 51, 51, 0.6); }
 
 @media (max-width: 991px) {
   #showcase {

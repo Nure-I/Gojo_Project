@@ -136,8 +136,16 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 JAZZMIN_UI_TWEAKS = {
-    "theme": "cyborg",
-    "dark_mode_theme": "darkly",
+    "theme": "simplex",
+    # "dark_mode_theme": "darkly",
+}
+JAZZMIN_SETTINGS = {
+    "site_title": "Gojo Admin",
+    "site_header": "Gojo HRM",
+    "site_brand": "Gojo",
+    "site_logo": "img/logo white.png",
+    "welcome_sign": "Welcome to the Gojo",
+    "copyright": "Gojo HRM"
 }
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

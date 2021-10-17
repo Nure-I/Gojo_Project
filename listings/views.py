@@ -49,6 +49,7 @@ def listing(request, listing_id):
         realtor = None
     Service_pay = (int(listing.price * 0.02))
     Total_pay = (int(listing.price * 0.02) + listing.price)
+    convert_pay = (int(listing.price * 0.02) + listing.price) / 45
     yene_obj = {
         "process": "Express",
         "successUrl": "http://127.0.0.1:8000/en/contacts/success/" + str(listing_id),
@@ -76,7 +77,8 @@ def listing(request, listing_id):
         'customer': customer,
         'yenepay': yene_obj,
         'Service_pay': Service_pay,
-        'Total_pay': Total_pay
+        'Total_pay': Total_pay,
+        'convert_pay': convert_pay
     }
 
     return render(request, 'listings/listing.html', context)
@@ -183,7 +185,7 @@ def addlist(request):
             photo_5 = request.POST['image5']
             photo_6 = request.POST['image6']
 
-            if Listing.objects.filter(address=address).exists():
+            if Listing.objects.filter(address=address, city=city).exists():
                 messages.error(request, 'That address is taken')
                 return redirect('addlisting')
             else:
